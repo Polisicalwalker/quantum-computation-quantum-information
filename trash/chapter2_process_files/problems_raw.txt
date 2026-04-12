@@ -1,0 +1,110 @@
+=== Problem 2.1 ===
+Problem 2.1 on page 117.
+Another important matrix function is the trace of a matrix. The trace of A is deﬁned
+to be the sum of its diagonal elements,
+tr(A) ≺
+⎬
+i
+Aii.
+(2.59)
+The trace is easily seen to be cyclic, tr(AB) = tr(BA), and linear, tr(A + B) =
+tr(A)+tr(B), tr(zA) = z tr(A), where A and B are arbitrary matrices, and z is a complex
+number. Furthermore, from the cyclic property it follows that the trace of a matrix
+is invariant under the unitary similarity transformation A ⊂UAU †, as tr(UAU †) =
+tr(U †UA) = tr(A). In light of this result, it makes sense to deﬁne the trace of an operator
+A to be the trace of any matrix representation of A. The invariance of the trace under
+unitary similarity transformations ensures that the trace of an operator is well deﬁned.
+As an example of the trace, suppose |ψ∝is a unit vector and A is an arbitrary op-
+erator. To evaluate tr(A|ψ∝⟨ψ|) use the Gram–Schmidt procedure to extend |ψ∝to an
+
+--- Page 17 ---
+76
+Introduction to quantum mechanics
+orthonormal basis |i∝which includes |ψ∝as the ﬁrst element. Then we have
+tr(A|ψ∝⟨ψ|) =
+⎬
+i
+⟨i|A|ψ∝⟨ψ|i∝
+(2.60)
+= ⟨ψ|A|ψ∝.
+(2.61)
+This result, that tr(A|ψ∝⟨ψ|) = ⟨ψ|A|ψ∝is extremely useful in evaluating the trace of an
+operator.
+Exercise 2.36:
+Show that the Pauli matrices except for I have trace zero.
+Exercise 2.37: (Cyclic property of the trace)
+If A and B are two linear operators
+show that
+tr(AB) = tr(BA).
+(2.62)
+Exercise 2.38: (Linearity of the trace)
+If A and B are two linear operators, show
+that
+tr(A + B) = tr(A) + tr(B)
+(2.63)
+and if z is an arbitrary complex number show that
+tr(zA) = ztr(A).
+(2.64)
+Exercise 2.39: (The Hilbert–Schmidt inner product on operators)
+The set LV
+of linear operators on a Hilbert space V is obviously a vector space – the sum of
+two linear operators is a linear operator, zA is a linear operator if A is a linear
+operator and z is a complex number, and there is a zero element 0. An important
+additional result is that the vector space LV can be given a natural inn
+
+=== Problem 2.2 ===
+Problem 2.2: (Properties of the Schmidt number)
+Suppose |ψ∝is a pure state of
+a composite system with components A and B.
+(1) Prove that the Schmidt number of |ψ∝is equal to the rank of the reduced
+density matrix ,A ≺trB(|ψ∝⟨ψ|). (Note that the rank of a Hermitian
+operator is equal to the dimension of its support.)
+(2) Suppose |ψ∝= #
+j |αj∝|βj∝is a representation for |ψ∝, where |αj∝and |βj∝
+are (un-normalized) states for systems A and B, respectively. Prove that the
+
+--- Page 59 ---
+118
+Introduction to quantum mechanics
+number of terms in such a decomposition is greater than or equal to the
+Schmidt number of |ψ∝, Sch(ψ).
+(3) Suppose |ψ∝= α|ϕ∝+ β|γ∝. Prove that
+Sch(ψ) ∩|Sch(ϕ) ∇Sch(γ)| .
+(2.232)
+
+
+=== Problem 2.3 ===
+Problem 2.3: (Tsirelson’s inequality)
+Suppose
+Q = ⃗q · ⃗σ, R = ⃗r · ⃗σ, S = ⃗s · ⃗σ, T = ⃗t · ⃗σ, where ⃗q,⃗r,⃗s and ⃗t are real unit vectors
+in three dimensions. Show that
+(Q ◦S + R ◦S + R ◦T ∇Q ◦T)2 = 4I + [Q, R] ◦[S, T].
+(2.233)
+Use this result to prove that
+⟨Q ◦S∝+ ⟨R ◦S∝+ ⟨R ◦T∝∇⟨Q ◦T∝≤2
+↔
+2,
+(2.234)
+so the violation of the Bell inequality found in Equation (2.230) is the maximum
+possible in quantum mechanics.
+History and further reading
+There are an enormous number of books on linear algebra at levels ranging from High
+School through to Graduate School. Perhaps our favorites are the two volume set by
+Horn and Johnson[HJ85, HJ91], which cover an extensive range of topics in an accessible
+manner. Other useful references include Marcus and Minc[MM92], and Bhatia[Bha97]. Good
+introductions to linear algebra include Halmos[Hal58], Perlis[Per52], and Strang[Str76].
+There are many excellent books on quantum mechanics. Unfortunately, most of
+these books focus on topics of tangential interest to quantum information and computa-
+tion. Perhaps the most relevant in the existing literature is Peres’ superb book[Per93].
+Beside an extremely clear exposition of elementary quantum mechanics, Peres gives
+an extensive discussion of the Bell inequalities and related results. Good introductory
+level texts include Sakurai’s book[Sak95], Volume III of the superb series by Feynman,
+Leighton, and Sands[FLS65a], and the two volume work by Cohen-Tannoudji, Diu and
+Lalo¨e[CTDL77a, CTDL77b]. All three of these works are somewhat closer in spirit to quan-
+tum computation and quantum information than are most other quantum mechanics
+texts, although the great bulk of each is still taken up by applications far removed from
+quantum computation and quantum information. As a result, none of these texts need
+be read in detail by someone interested in learning about quantum computation and
+quantum information. However, any one of these texts may prove handy as a reference,
+especially when reading 
+

@@ -1,0 +1,3939 @@
+--- Page 1 ---
+2 Introduction to quantum mechanics
+I ain’t no physicist but I know what matters.
+– Popeye the Sailor
+Quantum mechanics: Real Black Magic Calculus
+– Albert Einstein
+Quantum mechanics is the most accurate and complete description of the world known. It
+is also the basis for an understanding of quantum computation and quantum information.
+This chapter provides all the necessary background knowledge of quantum mechanics
+needed for a thorough grasp of quantum computation and quantum information. No
+prior knowledge of quantum mechanics is assumed.
+Quantum mechanics is easy to learn, despite its reputation as a difﬁcult subject. The
+reputation comes from the difﬁculty of some applications, like understanding the struc-
+ture of complicated molecules, which aren’t fundamental to a grasp of the subject; we
+won’t be discussing such applications. The only prerequisite for understanding is some
+familiarity with elementary linear algebra. Provided you have this background you can
+begin working out simple problems in a few hours, even with no prior knowledge of the
+subject.
+Readers already familiar with quantum mechanics can quickly skim through this chap-
+ter, to become familiar with our (mostly standard) notational conventions, and to assure
+themselves of familiarity with all the material. Readers with little or no prior knowledge
+should work through the chapter in detail, pausing to attempt the exercises. If you have
+difﬁculty with an exercise, move on, and return later to make another attempt.
+The chapter begins with a review of some material from linear algebra in Section 2.1.
+This section assumes familiarity with elementary linear algebra, but introduces the nota-
+tion used by physicists to describe quantum mechanics, which is different to that used in
+most introductions to linear algebra. Section 2.2 describes the basic postulates of quan-
+tum mechanics. Upon completion of the section, you will have understood all of the
+fundamental principles of quantum mechanics. This section contains numerous simple
+exercises designed to help consolidate your grasp of this material. The remaining sections
+of the chapter, and of this book, elucidate upon this material, without introducing fun-
+damentally new physical principles. Section 2.3 explains superdense coding, a surprising
+and illuminating example of quantum information processing which combines many of
+the postulates of quantum mechanics in a simple setting. Sections 2.4 and 2.5 develop
+powerful mathematical tools – the density operator, puriﬁcations, and the Schmidt de-
+composition – which are especially useful in the study of quantum computation and
+quantum information. Understanding these tools will also help you consolidate your un-
+derstanding of elementary quantum mechanics. Finally, Section 2.6 examines the question
+of how quantum mechanics goes beyond the usual ‘classical’ understanding of the way
+the world works.
+
+--- Page 2 ---
+Linear algebra
+61
+2.1
+Linear algebra
+This book is written as much to disturb and annoy as to instruct.
+– The ﬁrst line of About Vectors, by Banesh Hoffmann.
+Life is complex – it has both real and imaginary parts.
+– Anonymous
+Linear algebra is the study of vector spaces and of linear operations on those vector
+spaces. A good understanding of quantum mechanics is based upon a solid grasp of
+elementary linear algebra. In this section we review some basic concepts from linear
+algebra, and describe the standard notations which are used for these concepts in the
+study of quantum mechanics. These notations are summarized in Figure 2.1 on page 62,
+with the quantum notation in the left column, and the linear-algebraic description in the
+right column. You may like to glance at the table, and see how many of the concepts in
+the right column you recognize.
+In our opinion the chief obstacle to assimilation of the postulates of quantum mechan-
+ics is not the postulates themselves, but rather the large body of linear algebraic notions
+required to understand them. Coupled with the unusual Dirac notation adopted by physi-
+cists for quantum mechanics, it can appear (falsely) quite fearsome. For these reasons,
+we advise the reader not familiar with quantum mechanics to quickly read through the
+material which follows, pausing mainly to concentrate on understanding the absolute ba-
+sics of the notation being used. Then proceed to a careful study of the main topic of the
+chapter – the postulates of quantum mechanics – returning to study the necessary linear
+algebraic notions and notations in more depth, as required.
+The basic objects of linear algebra are vector spaces. The vector space of most interest
+to us is Cn, the space of all n-tuples of complex numbers, (z1, . . . , zn). The elements of
+a vector space are called vectors, and we will sometimes use the column matrix notation
+
+
+z1
+...
+zn
+
+
+(2.1)
+to indicate a vector. There is an addition operation deﬁned which takes pairs of vectors
+to other vectors. In Cn the addition operation for vectors is deﬁned by
+
+
+z1
+...
+zn
+
++
+
+
+z′
+1...
+z′
+n
+
+≡
+
+
+z1 + z′
+1
+...
+zn + z′
+n
+
+,
+(2.2)
+where the addition operations on the right are just ordinary additions of complex numbers.
+Furthermore, in a vector space there is a multiplication by a scalar operation. In Cn
+this operation is deﬁned by
+z
+
+
+z1
+...
+zn
+
+≡
+
+
+zz1
+...
+zzn
+
+,
+(2.3)
+
+--- Page 3 ---
+62
+Introduction to quantum mechanics
+where z is a scalar, that is, a complex number, and the multiplications on the right
+are ordinary multiplication of complex numbers. Physicists sometimes refer to complex
+numbers as c-numbers.
+Quantum mechanics is our main motivation for studying linear algebra, so we will use
+the standard notation of quantum mechanics for linear algebraic concepts. The standard
+quantum mechanical notation for a vector in a vector space is the following:
+|ψ∝.
+(2.4)
+ψ is a label for the vector (any label is valid, although we prefer to use simple labels like
+ψ and ϕ). The |·∝notation is used to indicate that the object is a vector. The entire object
+|ψ∝is sometimes called a ket, although we won’t use that terminology often.
+A vector space also contains a special zero vector, which we denote by 0. It satisﬁes
+the property that for any other vector |v∝, |v∝+ 0 = |v∝. Note that we do not use the
+ket notation for the zero vector – it is the only exception we shall make. The reason
+for making the exception is because it is conventional to use the ‘obvious’ notation for
+the zero vector, |0∝, to mean something else entirely. The scalar multiplication operation
+is such that z0 = 0 for any complex number z. For convenience, we use the notation
+(z1, . . . , zn) to denote a column matrix with entries z1, . . . , zn. In Cn the zero element
+is (0, 0, . . . , 0). A vector subspace of a vector space V is a subset W of V such that W is
+also a vector space, that is, W must be closed under scalar multiplication and addition.
+Notation
+Description
+z∗
+Complex conjugate of the complex number z.
+(1 + i)∗= 1 ∇i
+|ψ∝
+Vector. Also known as a ket.
+⟨ψ|
+Vector dual to |ψ∝. Also known as a bra.
+⟨ϕ|ψ∝
+Inner product between the vectors |ϕ∝and |ψ∝.
+|ϕ∝◦|ψ∝
+Tensor product of |ϕ∝and |ψ∝.
+|ϕ∝|ψ∝
+Abbreviated notation for tensor product of |ϕ∝and |ψ∝.
+A∗
+Complex conjugate of the A matrix.
+AT
+Transpose of the A matrix.
+A†
+Hermitian conjugate or adjoint of the A matrix, A† = (AT )∗.
+! a
+b
+c
+d
+"†
+=
+! a∗
+c∗
+b∗
+d∗
+"
+.
+⟨ϕ|A|ψ∝
+Inner product between |ϕ∝and A|ψ∝.
+Equivalently, inner product between A†|ϕ∝and |ψ∝.
+Figure 2.1. Summary of some standard quantum mechanical notation for notions from linear algebra. This style of
+notation is known as the Dirac notation.
+2.1.1
+Bases and linear independence
+A spanning set for a vector space is a set of vectors |v1∝, . . . , |vn∝such that any vector
+|v∝in the vector space can be written as a linear combination |v∝= #
+i ai|vi∝of vectors
+
+--- Page 4 ---
+Linear algebra
+63
+in that set. For example, a spanning set for the vector space C2 is the set
+|v1∝≺
+! 1
+0
+"
+;
+|v2∝≺
+! 0
+1
+"
+,
+(2.5)
+since any vector
+|v∝=
+! a1
+a2
+"
+(2.6)
+in C2 can be written as a linear combination |v∝= a1|v1∝+ a2|v2∝of the vectors |v1∝and
+|v2∝. We say that the vectors |v1∝and |v2∝span the vector space C2.
+Generally, a vector space may have many different spanning sets. A second spanning
+set for the vector space C2 is the set
+|v1∝≺
+1
+↔
+2
+! 1
+1
+"
+;
+|v2∝≺
+1
+↔
+2
+!
+1
+∇1
+"
+,
+(2.7)
+since an arbitrary vector |v∝= (a1, a2) can be written as a linear combination of |v1∝and
+|v2∝,
+|v∝= a1 + a2
+↔
+2
+|v1∝+ a1 ∇a2
+↔
+2
+|v2∝.
+(2.8)
+A set of non-zero vectors |v1∝, . . . , |vn∝are linearly dependent if there exists a set of
+complex numbers a1, . . . , an with ai ∼= 0 for at least one value of i, such that
+a1|v1∝+ a2|v2∝+ · · · + an|vn∝= 0.
+(2.9)
+A set of vectors is linearly independent if it is not linearly dependent. It can be shown
+that any two sets of linearly independent vectors which span a vector space V contain the
+same number of elements. We call such a set a basis for V . Furthermore, such a basis
+set always exists. The number of elements in the basis is deﬁned to be the dimension of
+V . In this book we will only be interested in ﬁnite dimensional vector spaces. There are
+many interesting and often difﬁcult questions associated with inﬁnite dimensional vector
+spaces. We won’t need to worry about these questions.
+Exercise 2.1: (Linear dependence: example)
+Show that (1, ∇1), (1, 2) and (2, 1)
+are linearly dependent.
+2.1.2
+Linear operators and matrices
+A linear operator between vector spaces V and W is deﬁned to be any function A :
+V ⊂W which is linear in its inputs,
+A
+⎫⎬
+i
+ai|vi∝
+⎭
+=
+⎬
+i
+aiA
+'|vi∝
+( .
+(2.10)
+Usually we just write A|v∝to denote A(|v∝). When we say that a linear operator A is
+deﬁned on a vector space, V , we mean that A is a linear operator from V to V . An
+important linear operator on any vector space V is the identity operator, IV , deﬁned by
+the equation IV |v∝≺|v∝for all vectors |v∝. Where no chance of confusion arises we drop
+the subscript V and just write I to denote the identity operator. Another important linear
+operator is the zero operator, which we denote 0. The zero operator maps all vectors to
+
+--- Page 5 ---
+64
+Introduction to quantum mechanics
+the zero vector, 0|v∝≺0. It is clear from (2.10) that once the action of a linear operator
+A on a basis is speciﬁed, the action of A is completely determined on all inputs.
+Suppose V, W, and X are vector spaces, and A : V ⊂W and B : W ⊂X are
+linear operators. Then we use the notation BA to denote the composition of B with A,
+deﬁned by (BA)(|v∝) ≺B(A(|v∝)). Once again, we write BA|v∝as an abbreviation for
+(BA)(|v∝).
+The most convenient way to understand linear operators is in terms of their matrix
+representations. In fact, the linear operator and matrix viewpoints turn out to be com-
+pletely equivalent. The matrix viewpoint may be more familiar to you, however. To see
+the connection, it helps to ﬁrst understand that an m by n complex matrix A with entries
+Aij is in fact a linear operator sending vectors in the vector space Cn to the vector space
+Cm, under matrix multiplication of the matrix A by a vector in Cn. More precisely, the
+claim that the matrix A is a linear operator just means that
+A
+⎫⎬
+i
+ai|vi∝
+⎭
+=
+⎬
+i
+aiA|vi∝
+(2.11)
+is true as an equation where the operation is matrix multiplication of A by column vectors.
+Clearly, this is true!
+We’ve seen that matrices can be regarded as linear operators. Can linear operators
+be given a matrix representation? In fact they can, as we now explain. This equivalence
+between the two viewpoints justiﬁes our interchanging terms from matrix theory and
+operator theory throughout the book. Suppose A : V ⊂W is a linear operator between
+vector spaces V and W. Suppose |v1∝, . . . , |vm∝is a basis for V and |w1∝, . . ., |wn∝is a
+basis for W. Then for each j in the range 1, . . . , m, there exist complex numbers A1j
+through Anj such that
+A|vj∝=
+⎬
+i
+Aij|wi∝.
+(2.12)
+The matrix whose entries are the values Aij is said to form a matrix representation of the
+operator A. This matrix representation of A is completely equivalent to the operator A,
+and we will use the matrix representation and abstract operator viewpoints interchange-
+ably. Note that to make the connection between matrices and linear operators we must
+specify a set of input and output basis states for the input and output vector spaces of
+the linear operator.
+Exercise 2.2: (Matrix representations: example)
+Suppose V is a vector space
+with basis vectors |0∝and |1∝, and A is a linear operator from V to V such that
+A|0∝= |1∝and A|1∝= |0∝. Give a matrix representation for A, with respect to
+the input basis |0∝, |1∝, and the output basis |0∝, |1∝. Find input and output bases
+which give rise to a different matrix representation of A.
+Exercise 2.3: (Matrix representation for operator products)
+Suppose A is a
+linear operator from vector space V to vector space W, and B is a linear
+operator from vector space W to vector space X. Let |vi∝, |wj∝, and |xk∝be
+bases for the vector spaces V, W, and X, respectively. Show that the matrix
+representation for the linear transformation BA is the matrix product of the
+matrix representations for B and A, with respect to the appropriate bases.
+
+--- Page 6 ---
+Linear algebra
+65
+Exercise 2.4: (Matrix representation for identity)
+Show that the identity operator
+on a vector space V has a matrix representation which is one along the diagonal
+and zero everywhere else, if the matrix representation is taken with respect to the
+same input and output bases. This matrix is known as the identity matrix.
+2.1.3
+The Pauli matrices
+Four extremely useful matrices which we shall often have occasion to use are the Pauli
+matrices. These are 2 by 2 matrices, which go by a variety of notations. The matrices,
+and their corresponding notations, are depicted in Figure 2.2. The Pauli matrices are so
+useful in the study of quantum computation and quantum information that we encourage
+you to memorize them by working through in detail the many examples and exercises
+based upon them in subsequent sections.
+σ0 ≺I ≺
+! 1
+0
+0
+1
+"
+σ2 ≺σy ≺Y ≺
+! 0
+∇i
+i
+0
+"
+σ1 ≺σx ≺X ≺
+! 0
+1
+1
+0
+"
+σ3 ≺σz ≺Z ≺
+! 1
+0
+0
+∇1
+"
+Figure 2.2. The Pauli matrices. Sometimes I is omitted from the list with just X, Y and Z known as the Pauli
+matrices.
+2.1.4
+Inner products
+An inner product is a function which takes as input two vectors |v∝and |w∝from a vector
+space and produces a complex number as output. For the time being, it will be convenient
+to write the inner product of |v∝and |w∝as (|v∝, |w∝). This is not the standard quantum
+mechanical notation; for pedagogical clarity the (·, ·) notation will be useful occasionally in
+this chapter. The standard quantum mechanical notation for the inner product (|v∝, |w∝)
+is ⟨v|w∝, where |v∝and |w∝are vectors in the inner product space, and the notation ⟨v|
+is used for the dual vector to the vector |v∝; the dual is a linear operator from the inner
+product space V to the complex numbers C, deﬁned by ⟨v|(|w∝) ≺⟨v|w∝≺(|v∝, |w∝).
+We will see shortly that the matrix representation of dual vectors is just a row vector.
+A function (·, ·) from V ⇒V to C is an inner product if it satisﬁes the requirements
+that:
+(1) (·, ·) is linear in the second argument,
+⎫
+|v∝,
+⎬
+i
+λi|wi∝
+⎭
+=
+⎬
+i
+λi
+'|v∝, |wi∝
+( .
+(2.13)
+(2) (|v∝, |w∝) = (|w∝, |v∝)∗.
+(3) (|v∝, |v∝) ∩0 with equality if and only if |v∝= 0.
+For example, Cn has an inner product deﬁned by
+((y1, . . . , yn), (z1, . . . , zn)) ≺
+⎬
+i
+y∗
+i zi =
+)y∗
+1 . . . y∗
+n
+*
+
+
+z1
+...
+zn
+
+.
+(2.14)
+
+--- Page 7 ---
+66
+Introduction to quantum mechanics
+We call a vector space equipped with an inner product an inner product space.
+Exercise 2.5:
+Verify that (·, ·) just deﬁned is an inner product on Cn.
+Exercise 2.6:
+Show that any inner product (·, ·) is conjugate-linear in the ﬁrst
+argument,
+⎫⎬
+i
+λi|wi∝, |v∝
+⎭
+=
+⎬
+i
+λ∗
+i (|wi∝, |v∝).
+(2.15)
+Discussions of quantum mechanics often refer to Hilbert space. In the ﬁnite dimen-
+sional complex vector spaces that come up in quantum computation and quantum infor-
+mation, a Hilbert space is exactly the same thing as an inner product space. From now
+on we use the two terms interchangeably, preferring the term Hilbert space. In inﬁnite
+dimensions Hilbert spaces satisfy additional technical restrictions above and beyond inner
+product spaces, which we will not need to worry about.
+Vectors |w∝and |v∝are orthogonal if their inner product is zero. For example, |w∝≺
+(1, 0) and |v∝≺(0, 1) are orthogonal with respect to the inner product deﬁned by (2.14).
+We deﬁne the norm of a vector |v∝by
+⊇|v∝⊇≺
+1
+⟨v|v∝.
+(2.16)
+A unit vector is a vector |v∝such that ⊇|v∝⊇= 1. We also say that |v∝is normalized if
+⊇|v∝⊇= 1. It is convenient to talk of normalizing a vector by dividing by its norm; thus
+|v∝/⊇|v∝⊇is the normalized form of |v∝, for any non-zero vector |v∝. A set |i∝of vectors
+with index i is orthonormal if each vector is a unit vector, and distinct vectors in the set
+are orthogonal, that is, ⟨i|j∝= δij, where i and j are both chosen from the index set.
+Exercise 2.7:
+Verify that |w∝≺(1, 1) and |v∝≺(1, ∇1) are orthogonal. What are the
+normalized forms of these vectors?
+Suppose |w1∝, . . . , |wd∝is a basis set for some vector space V with an inner product.
+There is a useful method, the Gram–Schmidt procedure, which can be used to produce an
+orthonormal basis set |v1∝, . . . , |vd∝for the vector space V . Deﬁne |v1∝≺|w1∝/⊇|w1∝⊇,
+and for 1 ≤k ≤d ∇1 deﬁne |vk+1∝inductively by
+|vk+1∝≺
+|wk+1∝∇#k
+i=1⟨vi|wk+1∝|vi∝
+⊇|wk+1∝∇#k
+i=1⟨vi|wk+1∝|vi∝⊇
+.
+(2.17)
+It is not difﬁcult to verify that the vectors |v1∝, . . ., |vd∝form an orthonormal set which
+is also a basis for V . Thus, any ﬁnite dimensional vector space of dimension d has an
+orthonormal basis, |v1∝, . . . , |vd∝.
+Exercise 2.8:
+Prove that the Gram–Schmidt procedure produces an orthonormal basis
+for V .
+From now on, when we speak of a matrix representation for a linear operator, we mean
+a matrix representation with respect to orthonormal input and output bases. We also use
+the convention that if the input and output spaces for a linear operator are the same, then
+the input and output bases are the same, unless noted otherwise.
+
+--- Page 8 ---
+Linear algebra
+67
+With these conventions, the inner product on a Hilbert space can be given a convenient
+matrix representation. Let |w∝= #
+i wi|i∝and |v∝= #
+j vj|j∝be representations of
+vectors |w∝and |v∝with respect to some orthonormal basis |i∝. Then, since ⟨i|j∝= δij,
+⟨v|w∝=
+
+⎬
+i
+vi|i∝,
+⎬
+j
+wj|j∝
+
+=
+⎬
+ij
+v∗
+i wjδij =
+⎬
+i
+v∗
+i wi
+(2.18)
+=
+)v∗
+1 . . . v∗
+n
+*
+
+
+w1
+...
+wn
+
+.
+(2.19)
+That is, the inner product of two vectors is equal to the vector inner product between
+two matrix representations of those vectors, provided the representations are written
+with respect to the same orthonormal basis. We also see that the dual vector ⟨v| has a
+nice interpretation as the row vector whose components are complex conjugates of the
+corresponding components of the column vector representation of |v∝.
+There is a useful way of representing linear operators which makes use of the inner
+product, known as the outer product representation. Suppose |v∝is a vector in an inner
+product space V , and |w∝is a vector in an inner product space W. Deﬁne |w∝⟨v| to be
+the linear operator from V to W whose action is deﬁned by
+'|w∝⟨v|
+( '|v′∝
+( ≺|w∝⟨v|v′∝= ⟨v|v′∝|w∝.
+(2.20)
+This equation ﬁts beautifully into our notational conventions, according to which the
+expression |w∝⟨v|v′∝could potentially have one of two meanings: we will use it to denote
+the result when the operator |w∝⟨v| acts on |v′∝, and it has an existing interpretation as
+the result of multiplying |w∝by the complex number ⟨v|v′∝. Our deﬁnitions are chosen
+so that these two potential meanings coincide. Indeed, we deﬁne the former in terms of
+the latter!
+We can take linear combinations of outer product operators |w∝⟨v| in the obvious way.
+By deﬁnition #
+i ai|wi∝⟨vi| is the linear operator which, when acting on |v′∝, produces
+#
+i ai|wi∝⟨vi|v′∝as output.
+The usefulness of the outer product notation can be discerned from an important result
+known as the completeness relation for orthonormal vectors. Let |i∝be any orthonormal
+basis for the vector space V , so an arbitrary vector |v∝can be written |v∝= #
+i vi|i∝for
+some set of complex numbers vi. Note that ⟨i|v∝= vi and therefore
+⎫⎬
+i
+|i∝⟨i|
+⎭
+|v∝=
+⎬
+i
+|i∝⟨i|v∝=
+⎬
+i
+vi|i∝= |v∝.
+(2.21)
+Since the last equation is true for all |v∝it follows that
+⎬
+i
+|i∝⟨i| = I.
+(2.22)
+This equation is known as the completeness relation. One application of the completeness
+relation is to give a means for representing any operator in the outer product notation.
+Suppose A : V ⊂W is a linear operator, |vi∝is an orthonormal basis for V , and |wj∝
+an orthonormal basis for W. Using the completeness relation twice we obtain
+A = IW AIV
+(2.23)
+
+--- Page 9 ---
+68
+Introduction to quantum mechanics
+=
+⎬
+ij
+|wj∝⟨wj|A|vi∝⟨vi|
+(2.24)
+=
+⎬
+ij
+⟨wj|A|vi∝|wj∝⟨vi|,
+(2.25)
+which is the outer product representation for A. We also see from this equation that A
+has matrix element ⟨wj|A|vi∝in the ith column and jth row, with respect to the input
+basis |vi∝and output basis |wj∝.
+A second application illustrating the usefulness of the completeness relation is the
+Cauchy–Schwarz inequality. This important result is discussed in Box 2.1, on this
+page.
+Exercise 2.9: (Pauli operators and the outer product)
+The Pauli matrices
+(Figure 2.2 on page 65) can be considered as operators with respect to an
+orthonormal basis |0∝, |1∝for a two-dimensional Hilbert space. Express each of
+the Pauli operators in the outer product notation.
+Exercise 2.10:
+Suppose |vi∝is an orthonormal basis for an inner product space V .
+What is the matrix representation for the operator |vj∝⟨vk|, with respect to the
+|vi∝basis?
+Box 2.1: The Cauchy-Schwarz inequality
+The Cauchy–Schwarz inequality is an important geometric fact about Hilbert
+spaces. It states that for any two vectors |v∝and |w∝, |⟨v|w∝|2 ≤⟨v|v∝⟨w|w∝. To
+see this, use the Gram–Schmidt procedure to construct an orthonormal basis |i∝
+for the vector space such that the ﬁrst member of the basis |i∝is |w∝/
+6
+⟨w|w∝.
+Using the completeness relation #
+i |i∝⟨i| = I, and dropping some non-negative
+terms gives
+⟨v|v∝⟨w|w∝=
+⎬
+i
+⟨v|i∝⟨i|v∝⟨w|w∝
+(2.26)
+∩⟨v|w∝⟨w|v∝
+⟨w|w∝
+⟨w|w∝
+(2.27)
+= ⟨v|w∝⟨w|v∝= |⟨v|w∝|2,
+(2.28)
+as required. A little thought shows that equality occurs if and only if |v∝and |w∝
+are linearly related, |v∝= z|w∝or |w∝= z|v∝, for some scalar z.
+2.1.5
+Eigenvectors and eigenvalues
+An eigenvector of a linear operator A on a vector space is a non-zero vector |v∝such that
+A|v∝= v|v∝, where v is a complex number known as the eigenvalue of A corresponding
+to |v∝. It will often be convenient to use the notation v both as a label for the eigenvector,
+and to represent the eigenvalue. We assume that you are familiar with the elementary
+properties of eigenvalues and eigenvectors – in particular, how to ﬁnd them, via the
+characteristic equation. The characteristic function is deﬁned to be c(λ) ≺det |A∇λI|,
+
+--- Page 10 ---
+Linear algebra
+69
+where det is the determinant function for matrices; it can be shown that the characteristic
+function depends only upon the operator A, and not on the speciﬁc matrix representation
+used for A. The solutions of the characteristic equation c(λ) = 0 are the eigenvalues
+of the operator A. By the fundamental theorem of algebra, every polynomial has at least
+one complex root, so every operator A has at least one eigenvalue, and a corresponding
+eigenvector. The eigenspace corresponding to an eigenvalue v is the set of vectors which
+have eigenvalue v. It is a vector subspace of the vector space on which A acts.
+A diagonal representation for an operator A on a vector space V is a representation
+A = #
+i λi|i∝⟨i|, where the vectors |i∝form an orthonormal set of eigenvectors for A,
+with corresponding eigenvalues λi. An operator is said to be diagonalizable if it has a
+diagonal representation. In the next section we will ﬁnd a simple set of necessary and
+sufﬁcient conditions for an operator on a Hilbert space to be diagonalizable. As an example
+of a diagonal representation, note that the Pauli Z matrix may be written
+Z =
+! 1
+0
+0
+∇1
+"
+= |0∝⟨0| ∇|1∝⟨1|,
+(2.29)
+where the matrix representation is with respect to orthonormal vectors |0∝and |1∝, re-
+spectively. Diagonal representations are sometimes also known as orthonormal decom-
+positions.
+When an eigenspace is more than one dimensional we say that it is degenerate. For
+example, the matrix A deﬁned by
+A ≺
+
+
+2
+0
+0
+0
+2
+0
+0
+0
+0
+
+
+(2.30)
+has a two-dimensional eigenspace corresponding to the eigenvalue 2. The eigenvectors
+(1, 0, 0) and (0, 1, 0) are said to be degenerate because they are linearly independent
+eigenvectors of A with the same eigenvalue.
+Exercise 2.11: (Eigendecomposition of the Pauli matrices)
+Find the
+eigenvectors, eigenvalues, and diagonal representations of the Pauli matrices
+X, Y , and Z.
+Exercise 2.12:
+Prove that the matrix
+! 1
+0
+1
+1
+"
+(2.31)
+is not diagonalizable.
+2.1.6
+Adjoints and Hermitian operators
+Suppose A is any linear operator on a Hilbert space, V . It turns out that there exists a
+unique linear operator A† on V such that for all vectors |v∝, |w∝∈V ,
+(|v∝, A|w∝) = (A†|v∝, |w∝).
+(2.32)
+This linear operator is known as the adjoint or Hermitian conjugate of the operator
+A. From the deﬁnition it is easy to see that (AB)† = B†A†. By convention, if |v∝is
+a vector, then we deﬁne |v∝† ≺⟨v|. With this deﬁnition it is not difﬁcult to see that
+(A|v∝)† = ⟨v|A†.
+
+--- Page 11 ---
+70
+Introduction to quantum mechanics
+Exercise 2.13:
+If |w∝and |v∝are any two vectors, show that (|w∝⟨v|)† = |v∝⟨w|.
+Exercise 2.14: (Anti-linearity of the adjoint)
+Show that the adjoint operation is
+anti-linear,
+⎫⎬
+i
+aiAi
+⎭†
+=
+⎬
+i
+a∗
+i A†
+i.
+(2.33)
+Exercise 2.15:
+Show that (A†)† = A.
+In a matrix representation of an operator A, the action of the Hermitian conjugation
+operation is to take the matrix of A to the conjugate-transpose matrix, A† ≺(A∗)T ,
+where the ∗indicates complex conjugation, and T indicates the transpose operation. For
+example, we have
+! 1 + 3i
+2i
+1 + i
+1 ∇4i
+"†
+=
+! 1 ∇3i
+1 ∇i
+∇2i
+1 + 4i
+"
+.
+(2.34)
+An operator A whose adjoint is A is known as a Hermitian or self-adjoint op-
+erator. An important class of Hermitian operators is the projectors. Suppose W is a
+k-dimensional vector subspace of the d-dimensional vector space V . Using the Gram–
+Schmidt procedure it is possible to construct an orthonormal basis |1∝, . . ., |d∝for V
+such that |1∝, . . . , |k∝is an orthonormal basis for W. By deﬁnition,
+P ≺
+k
+⎬
+i=1
+|i∝⟨i|
+(2.35)
+is the projector onto the subspace W. It is easy to check that this deﬁnition is independent
+of the orthonormal basis |1∝, . . . , |k∝used for W. From the deﬁnition it can be shown that
+|v∝⟨v| is Hermitian for any vector |v∝, so P is Hermitian, P † = P. We will often refer
+to the ‘vector space’ P, as shorthand for the vector space onto which P is a projector.
+The orthogonal complement of P is the operator Q ≺I ∇P. It is easy to see that Q is
+a projector onto the vector space spanned by |k + 1∝, . . . , |d∝, which we also refer to as
+the orthogonal complement of P, and may denote by Q.
+Exercise 2.16:
+Show that any projector P satisﬁes the equation P 2 = P.
+An operator A is said to be normal if AA† = A†A. Clearly, an operator which
+is Hermitian is also normal. There is a remarkable representation theorem for normal
+operators known as the spectral decomposition, which states that an operator is a normal
+operator if and only if it is diagonalizable. This result is proved in Box 2.2 on page 72,
+which you should read closely.
+Exercise 2.17:
+Show that a normal matrix is Hermitian if and only if it has real
+eigenvalues.
+A matrix U is said to be unitary if U †U = I. Similarly an operator U is unitary if
+U †U = I. It is easily checked that an operator is unitary if and only if each of its matrix
+representations is unitary. A unitary operator also satisﬁes UU † = I, and therefore U is
+normal and has a spectral decomposition. Geometrically, unitary operators are important
+because they preserve inner products between vectors. To see this, let |v∝and |w∝be any
+
+--- Page 12 ---
+Linear algebra
+71
+two vectors. Then the inner product of U|v∝and U|w∝is the same as the inner product
+of |v∝and |w∝,
+'U|v∝, U|w∝
+( = ⟨v|U †U|w∝= ⟨v|I|w∝= ⟨v|w∝.
+(2.36)
+This result suggests the following elegant outer product representation of any unitary U.
+Let |vi∝be any orthonormal basis set. Deﬁne |wi∝≺U|vi∝, so |wi∝is also an orthonormal
+basis set, since unitary operators preserve inner products. Note that U = #
+i |wi∝⟨vi|.
+Conversely, if |vi∝and |wi∝are any two orthonormal bases, then it is easily checked that
+the operator U deﬁned by U ≺#
+i |wi∝⟨vi| is a unitary operator.
+Exercise 2.18:
+Show that all eigenvalues of a unitary matrix have modulus 1, that is,
+can be written in the form eiθ for some real θ.
+Exercise 2.19: (Pauli matrices: Hermitian and unitary)
+Show that the Pauli
+matrices are Hermitian and unitary.
+Exercise 2.20: (Basis changes)
+Suppose A′ and A′′ are matrix representations of an
+operator A on a vector space V with respect to two different orthonormal bases,
+|vi∝and |wi∝. Then the elements of A′ and A′′ are A′
+ij = ⟨vi|A|vj∝and
+A′′
+ij = ⟨wi|A|wj∝. Characterize the relationship between A′ and A′′.
+A special subclass of Hermitian operators is extremely important. This is the positive
+operators. A positive operator A is deﬁned to be an operator such that for any vector |v∝,
+(|v∝, A|v∝) is a real, non-negative number. If (|v∝, A|v∝) is strictly greater than zero for
+all |v∝∼= 0 then we say that A is positive deﬁnite. In Exercise 2.24 on this page you will
+show that any positive operator is automatically Hermitian, and therefore by the spectral
+decomposition has diagonal representation #
+i λi|i∝⟨i|, with non-negative eigenvalues λi.
+Exercise 2.21:
+Repeat the proof of the spectral decomposition in Box 2.2 for the case
+when M is Hermitian, simplifying the proof wherever possible.
+Exercise 2.22:
+Prove that two eigenvectors of a Hermitian operator with different
+eigenvalues are necessarily orthogonal.
+Exercise 2.23:
+Show that the eigenvalues of a projector P are all either 0 or 1.
+Exercise 2.24: (Hermiticity of positive operators)
+Show that a positive operator
+is necessarily Hermitian. (Hint: Show that an arbitrary operator A can be
+written A = B + iC where B and C are Hermitian.)
+Exercise 2.25:
+Show that for any operator A, A†A is positive.
+2.1.7
+Tensor products
+The tensor product is a way of putting vector spaces together to form larger vector spaces.
+This construction is crucial to understanding the quantum mechanics of multiparticle
+systems. The following discussion is a little abstract, and may be difﬁcult to follow if
+you’re not already familiar with the tensor product, so feel free to skip ahead now and
+revisit later when you come to the discussion of tensor products in quantum mechanics.
+Suppose V and W are vector spaces of dimension m and n respectively. For conve-
+nience we also suppose that V and W are Hilbert spaces. Then V ◦W (read ‘V tensor
+
+--- Page 13 ---
+72
+Introduction to quantum mechanics
+Box 2.2: The spectral decomposition – important!
+The spectral decomposition is an extremely useful representation theorem for nor-
+mal operators.
+Theorem 2.1: (Spectral decomposition) Any normal operator M on a vector
+space V is diagonal with respect to some orthonormal basis for V .
+Conversely, any diagonalizable operator is normal.
+Proof
+The converse is a simple exercise, so we prove merely the forward implication,
+by induction on the dimension d of V . The case d = 1 is trivial. Let λ be an
+eigenvalue of M, P the projector onto the λ eigenspace, and Q the projector onto
+the orthogonal complement. Then M = (P + Q)M(P + Q) = PMP + QMP +
+PMQ + QMQ. Obviously PMP = λP. Furthermore, QMP = 0, as M takes
+the subspace P into itself. We claim that PMQ = 0 also. To see this, let |v∝
+be an element of the subspace P. Then MM †|v∝= M †M|v∝= λM †|v∝. Thus,
+M †|v∝has eigenvalue λ and therefore is an element of the subspace P. It follows
+that QM †P = 0. Taking the adjoint of this equation gives PMQ = 0. Thus
+M = PMP + QMQ. Next, we prove that QMQ is normal. To see this, note that
+QM = QM(P + Q) = QMQ, and QM † = QM †(P + Q) = QM †Q. Therefore,
+by the normality of M, and the observation that Q2 = Q,
+QMQ QM †Q = QMQM †Q
+(2.37)
+= QMM †Q
+(2.38)
+= QM †MQ
+(2.39)
+= QM †QMQ
+(2.40)
+= QM †Q QMQ ,
+(2.41)
+so QMQ is normal. By induction, QMQ is diagonal with respect to some or-
+thonormal basis for the subspace Q, and PMP is already diagonal with respect
+to some orthonormal basis for P. It follows that M = PMP + QMQ is diagonal
+with respect to some orthonormal basis for the total vector space.
+In terms of the outer product representation, this means that M can be written as
+M = #
+i λi|i∝⟨i|, where λi are the eigenvalues of M, |i∝is an orthonormal basis
+for V , and each |i∝an eigenvector of M with eigenvalue λi. In terms of projectors,
+M = #
+i λiPi, where λi are again the eigenvalues of M, and Pi is the projector
+onto the λi eigenspace of M. These projectors satisfy the completeness relation
+#
+i Pi = I, and the orthonormality relation PiPj = δijPi.
+W’) is an mn dimensional vector space. The elements of V ◦W are linear combinations
+of ‘tensor products’ |v∝◦|w∝of elements |v∝of V and |w∝of W. In particular, if |i∝and
+|j∝are orthonormal bases for the spaces V and W then |i∝◦|j∝is a basis for V ◦W. We
+often use the abbreviated notations |v∝|w∝, |v, w∝or even |vw∝for the tensor product
+
+--- Page 14 ---
+Linear algebra
+73
+|v∝◦|w∝. For example, if V is a two-dimensional vector space with basis vectors |0∝and
+|1∝then |0∝◦|0∝+ |1∝◦|1∝is an element of V ◦V .
+By deﬁnition the tensor product satisﬁes the following basic properties:
+(1) For an arbitrary scalar z and elements |v∝of V and |w∝of W,
+z
+'|v∝◦|w∝
+( =
+'z|v∝
+( ◦|w∝= |v∝◦
+'z|w∝
+( .
+(2.42)
+(2) For arbitrary |v1∝and |v2∝in V and |w∝in W,
+'|v1∝+ |v2∝
+( ◦|w∝= |v1∝◦|w∝+ |v2∝◦|w∝.
+(2.43)
+(3) For arbitrary |v∝in V and |w1∝and |w2∝in W,
+|v∝◦
+'|w1∝+ |w2∝
+( = |v∝◦|w1∝+ |v∝◦|w2∝.
+(2.44)
+What sorts of linear operators act on the space V ◦W? Suppose |v∝and |w∝are
+vectors in V and W, and A and B are linear operators on V and W, respectively. Then
+we can deﬁne a linear operator A ◦B on V ◦W by the equation
+(A ◦B)(|v∝◦|w∝) ≺A|v∝◦B|w∝.
+(2.45)
+The deﬁnition of A ◦B is then extended to all elements of V ◦W in the natural way
+to ensure linearity of A ◦B, that is,
+(A ◦B)
+⎫⎬
+i
+ai|vi∝◦|wi∝
+⎭
+≺
+⎬
+i
+aiA|vi∝◦B|wi∝.
+(2.46)
+It can be shown that A ◦B deﬁned in this way is a well-deﬁned linear operator on
+V ◦W. This notion of the tensor product of two operators extends in the obvious way
+to the case where A : V ⊂V ′ and B : W ⊂W ′ map between different vector spaces.
+Indeed, an arbitrary linear operator C mapping V ◦W to V ′ ◦W ′ can be represented
+as a linear combination of tensor products of operators mapping V to V ′ and W to W ′,
+C =
+⎬
+i
+ciAi ◦Bi,
+(2.47)
+where by deﬁnition
+⎫⎬
+i
+ciAi ◦Bi
+⎭
+|v∝◦|w∝≺
+⎬
+i
+ciAi|v∝◦Bi|w∝.
+(2.48)
+The inner products on the spaces V and W can be used to deﬁne a natural inner
+product on V ◦W. Deﬁne
+
+⎬
+i
+ai|vi∝◦|wi∝,
+⎬
+j
+bj|v′
+j∝◦|w′
+j∝
+
+≺
+⎬
+ij
+a∗
+i bj⟨vi|v′
+j∝⟨wi|w′
+j∝.
+(2.49)
+It can be shown that the function so deﬁned is a well-deﬁned inner product. From this
+inner product, the inner product space V ◦W inherits the other structure we are familiar
+with, such as notions of an adjoint, unitarity, normality, and Hermiticity.
+All this discussion is rather abstract. It can be made much more concrete by moving
+
+--- Page 15 ---
+74
+Introduction to quantum mechanics
+to a convenient matrix representation known as the Kronecker product. Suppose A is
+an m by n matrix, and B is a p by q matrix. Then we have the matrix representation:
+nq
+7
+89
+:
+A ◦B ≺
+
+
+A11B
+A12B
+. . .
+A1nB
+A21B
+A22B
+. . .
+A2nB
+...
+...
+...
+...
+Am1B
+Am2B
+. . .
+AmnB
+
+
+
+
+
+
+⎜
+
+
+
+⎟
+mp .
+(2.50)
+In this representation terms like A11B denote p by q submatrices whose entries are
+proportional to B, with overall proportionality constant A11. For example, the tensor
+product of the vectors (1, 2) and (2, 3) is the vector
+! 1
+2
+"
+◦
+! 2
+3
+"
+=
+
+
+1 ⇒2
+1 ⇒3
+2 ⇒2
+2 ⇒3
+
+=
+
+
+2
+3
+4
+6
+
+.
+(2.51)
+The tensor product of the Pauli matrices X and Y is
+X ◦Y =
+! 0 · Y
+1 · Y
+1 · Y
+0 · Y
+"
+=
+
+
+0
+0
+0
+∇i
+0
+0
+i
+0
+0
+∇i
+0
+0
+i
+0
+0
+0
+
+.
+(2.52)
+Finally, we mention the useful notation |ψ∝⊗k, which means |ψ∝tensored with itself k
+times. For example |ψ∝⊗2 = |ψ∝◦|ψ∝. An analogous notation is also used for operators
+on tensor product spaces.
+Exercise 2.26:
+Let |ψ∝= (|0∝+ |1∝)/
+↔
+2. Write out |ψ∝⊗2 and |ψ∝⊗3 explicitly, both
+in terms of tensor products like |0∝|1∝, and using the Kronecker product.
+Exercise 2.27:
+Calculate the matrix representation of the tensor products of the Pauli
+operators (a) X and Z; (b) I and X; (c) X and I. Is the tensor product
+commutative?
+Exercise 2.28:
+Show that the transpose, complex conjugation, and adjoint operations
+distribute over the tensor product,
+(A ◦B)∗= A∗◦B∗; (A ◦B)T = AT ◦BT ; (A ◦B)† = A† ◦B†.(2.53)
+Exercise 2.29:
+Show that the tensor product of two unitary operators is unitary.
+Exercise 2.30:
+Show that the tensor product of two Hermitian operators is Hermitian.
+Exercise 2.31:
+Show that the tensor product of two positive operators is positive.
+Exercise 2.32:
+Show that the tensor product of two projectors is a projector.
+Exercise 2.33:
+The Hadamard operator on one qubit may be written as
+H =
+1
+↔
+2
+?
+(|0∝+ |1∝)⟨0| + (|0∝∇|1∝)⟨1|
+@
+.
+(2.54)
+
+--- Page 16 ---
+Linear algebra
+75
+Show explicitly that the Hadamard transform on n qubits, H⊗n, may be written
+as
+H⊗n =
+1
+↔
+2n
+⎬
+x,y
+(∇1)x·y|x∝⟨y|.
+(2.55)
+Write out an explicit matrix representation for H⊗2.
+2.1.8
+Operator functions
+There are many important functions which can be deﬁned for operators and matri-
+ces. Generally speaking, given a function f from the complex numbers to the com-
+plex numbers, it is possible to deﬁne a corresponding matrix function on normal ma-
+trices (or some subclass, such as the Hermitian matrices) by the following construc-
+tion. Let A = #
+a a|a∝⟨a| be a spectral decomposition for a normal operator A. Deﬁne
+f(A) ≺#
+a f(a)|a∝⟨a|. A little thought shows that f(A) is uniquely deﬁned. This pro-
+cedure can be used, for example, to deﬁne the square root of a positive operator, the
+logarithm of a positive-deﬁnite operator, or the exponential of a normal operator. As an
+example,
+exp(θZ) =
+! eθ
+0
+0
+e−θ
+"
+,
+(2.56)
+since Z has eigenvectors |0∝and |1∝.
+Exercise 2.34:
+Find the square root and logarithm of the matrix
+! 4
+3
+3
+4
+"
+.
+(2.57)
+Exercise 2.35: (Exponential of the Pauli matrices)
+Let ⃗v be any real,
+three-dimensional unit vector and θ a real number. Prove that
+exp(iθ⃗v · ⃗σ) = cos(θ)I + i sin(θ)⃗v · ⃗σ,
+(2.58)
+where ⃗v ·⃗σ ≺#3
+i=1 viσi. This exercise is generalized in Problem 2.1 on page 117.
+Another important matrix function is the trace of a matrix. The trace of A is deﬁned
+to be the sum of its diagonal elements,
+tr(A) ≺
+⎬
+i
+Aii.
+(2.59)
+The trace is easily seen to be cyclic, tr(AB) = tr(BA), and linear, tr(A + B) =
+tr(A)+tr(B), tr(zA) = z tr(A), where A and B are arbitrary matrices, and z is a complex
+number. Furthermore, from the cyclic property it follows that the trace of a matrix
+is invariant under the unitary similarity transformation A ⊂UAU †, as tr(UAU †) =
+tr(U †UA) = tr(A). In light of this result, it makes sense to deﬁne the trace of an operator
+A to be the trace of any matrix representation of A. The invariance of the trace under
+unitary similarity transformations ensures that the trace of an operator is well deﬁned.
+As an example of the trace, suppose |ψ∝is a unit vector and A is an arbitrary op-
+erator. To evaluate tr(A|ψ∝⟨ψ|) use the Gram–Schmidt procedure to extend |ψ∝to an
+
+--- Page 17 ---
+76
+Introduction to quantum mechanics
+orthonormal basis |i∝which includes |ψ∝as the ﬁrst element. Then we have
+tr(A|ψ∝⟨ψ|) =
+⎬
+i
+⟨i|A|ψ∝⟨ψ|i∝
+(2.60)
+= ⟨ψ|A|ψ∝.
+(2.61)
+This result, that tr(A|ψ∝⟨ψ|) = ⟨ψ|A|ψ∝is extremely useful in evaluating the trace of an
+operator.
+Exercise 2.36:
+Show that the Pauli matrices except for I have trace zero.
+Exercise 2.37: (Cyclic property of the trace)
+If A and B are two linear operators
+show that
+tr(AB) = tr(BA).
+(2.62)
+Exercise 2.38: (Linearity of the trace)
+If A and B are two linear operators, show
+that
+tr(A + B) = tr(A) + tr(B)
+(2.63)
+and if z is an arbitrary complex number show that
+tr(zA) = ztr(A).
+(2.64)
+Exercise 2.39: (The Hilbert–Schmidt inner product on operators)
+The set LV
+of linear operators on a Hilbert space V is obviously a vector space – the sum of
+two linear operators is a linear operator, zA is a linear operator if A is a linear
+operator and z is a complex number, and there is a zero element 0. An important
+additional result is that the vector space LV can be given a natural inner product
+structure, turning it into a Hilbert space.
+(1) Show that the function (·, ·) on LV ⇒LV deﬁned by
+(A, B) ≺tr(A†B)
+(2.65)
+is an inner product function. This inner product is known as the
+Hilbert–Schmidt or trace inner product.
+(2) If V has d dimensions show that LV has dimension d2.
+(3) Find an orthonormal basis of Hermitian matrices for the Hilbert space LV .
+2.1.9
+The commutator and anti-commutator
+The commutator between two operators A and B is deﬁned to be
+[A, B] ≺AB ∇BA.
+(2.66)
+If [A, B] = 0, that is, AB = BA, then we say A commutes with B. Similarly, the
+anti-commutator of two operators A and B is deﬁned by
+{A, B} ≺AB + BA;
+(2.67)
+we say A anti-commutes with B if {A, B} = 0. It turns out that many important prop-
+erties of pairs of operators can be deduced from their commutator and anti-commutator.
+Perhaps the most useful relation is the following connection between the commutator and
+the property of being able to simultaneously diagonalize Hermitian operators A and B,
+
+--- Page 18 ---
+Linear algebra
+77
+that is, write A = #
+i ai|i∝⟨i|, B = #
+i bi|i∝⟨i|, where |i∝is some common orthonormal
+set of eigenvectors for A and B.
+Theorem 2.2: (Simultaneous diagonalization theorem) Suppose A and B are
+Hermitian operators. Then [A, B] = 0 if and only if there exists an orthonormal
+basis such that both A and B are diagonal with respect to that basis. We say that
+A and B are simultaneously diagonalizable in this case.
+This result connects the commutator of two operators, which is often easy to compute,
+to the property of being simultaneously diagonalizable, which is a priori rather difﬁcult
+to determine. As an example, consider that
+[X, Y ] =
+! 0
+1
+1
+0
+" ! 0
+∇i
+i
+0
+"
+∇
+! 0
+∇i
+i
+0
+" ! 0
+1
+1
+0
+"
+(2.68)
+= 2i
+! 1
+0
+0
+∇1
+"
+(2.69)
+= 2iZ ,
+(2.70)
+so X and Y do not commute. You have already shown, in Exercise 2.11, that X and Y
+do not have common eigenvectors, as we expect from the simultaneous diagonalization
+theorem.
+Proof
+You can (and should!) easily verify that if A and B are diagonal in the same orthonormal
+basis then [A, B] = 0. To show the converse, let |a, j∝be an orthonormal basis for the
+eigenspace Va of A with eigenvalue a; the index j is used to label possible degeneracies.
+Note that
+AB|a, j∝= BA|a, j∝= aB|a, j∝,
+(2.71)
+and therefore B|a, j∝is an element of the eigenspace Va. Let Pa denote the projector
+onto the space Va and deﬁne Ba ≺PaBPa. It is easy to see that the restriction of Ba to
+the space Va is Hermitian on Va, and therefore has a spectral decomposition in terms of
+an orthonormal set of eigenvectors which span the space Va. Let’s call these eigenvectors
+|a, b, k∝, where the indices a and b label the eigenvalues of A and Ba, and k is an extra
+index to allow for the possibility of a degenerate Ba. Note that B|a, b, k∝is an element
+of Va, so B|a, b, k∝= PaB|a, b, k∝. Moreover we have Pa|a, b, k∝= |a, b, k∝, so
+B|a, b, k∝= PaBPa|a, b, k∝= b|a, b, k∝.
+(2.72)
+It follows that |a, b, k∝is an eigenvector of B with eigenvalue b, and therefore |a, b, k∝is
+an orthonormal set of eigenvectors of both A and B, spanning the entire vector space on
+which A and B are deﬁned. That is, A and B are simultaneously diagonalizable.
+Exercise 2.40: (Commutation relations for the Pauli matrices)
+Verify the
+commutation relations
+[X, Y ] = 2iZ;
+[Y, Z] = 2iX;
+[Z, X] = 2iY.
+(2.73)
+There is an elegant way of writing this using ϵjkl, the antisymmetric tensor on
+
+--- Page 19 ---
+78
+Introduction to quantum mechanics
+three indices, for which ϵjkl = 0 except for ϵ123 = ϵ231 = ϵ312 = 1, and
+ϵ321 = ϵ213 = ϵ132 = ∇1:
+[σj, σk] = 2i
+3
+⎬
+l=1
+ϵjklσl.
+(2.74)
+Exercise 2.41: (Anti-commutation relations for the Pauli matrices)
+Verify the
+anti-commutation relations
+{σi, σj} = 0
+(2.75)
+where i ∼= j are both chosen from the set 1, 2, 3. Also verify that (i = 0, 1, 2, 3)
+σ2
+i = I.
+(2.76)
+Exercise 2.42:
+Verify that
+AB = [A, B] + {A, B}
+2
+.
+(2.77)
+Exercise 2.43:
+Show that for j, k = 1, 2, 3,
+σjσk = δjkI + i
+3
+⎬
+l=1
+ϵjklσl.
+(2.78)
+Exercise 2.44:
+Suppose [A, B] = 0, {A, B} = 0, and A is invertible. Show that B
+must be 0.
+Exercise 2.45:
+Show that [A, B]† = [B†, A†].
+Exercise 2.46:
+Show that [A, B] = ∇[B, A].
+Exercise 2.47:
+Suppose A and B are Hermitian. Show that i[A, B] is Hermitian.
+2.1.10
+The polar and singular value decompositions
+The polar and singular value decompositions are useful ways of breaking linear operators
+up into simpler parts. In particular, these decompositions allow us to break general linear
+operators up into products of unitary operators and positive operators. While we don’t
+understand the structure of general linear operators terribly well, we do understand
+unitary operators and positive operators in quite some detail. The polar and singular
+value decompositions allow us to apply this understanding to better understand general
+linear operators.
+Theorem 2.3: (Polar decomposition) Let A be a linear operator on a vector space V .
+Then there exists unitary U and positive operators J and K such that
+A = UJ = KU,
+(2.79)
+where the unique positive operators J and K satisfying these equations are
+deﬁned by J ≺
+↔
+A†A and K ≺
+↔
+AA†. Moreover, if A is invertible then U is
+unique.
+
+--- Page 20 ---
+Linear algebra
+79
+We call the expression A = UJ the left polar decomposition of A, and A = KU the
+right polar decomposition of A. Most often, we’ll omit the ‘right’ or ‘left’ nomenclature,
+and use the term ‘polar decomposition’ for both expressions, with context indicating
+which is meant.
+Proof
+J ≺
+↔
+A†A is a positive operator, so it can be given a spectral decomposition, J =
+#
+i λi|i∝⟨i| (λi ∩0). Deﬁne |ψi∝≺A|i∝. From the deﬁnition, we see that ⟨ψi|ψi∝= λ2
+i.
+Consider for now only those i for which λi ∼= 0. For those i deﬁne |ei∝≺|ψi∝/λi, so
+the |ei∝are normalized. Moreover, they are orthogonal, since if i ∼= j then ⟨ei|ej∝=
+⟨i|A†A|j∝/λiλj = ⟨i|J2|j∝/λiλj = 0.
+We have been considering i such that λi ∼= 0. Now use the Gram–Schmidt procedure
+to extend the orthonormal set |ei∝so it forms an orthonormal basis, which we also label
+|ei∝. Deﬁne a unitary operator U ≺#
+i |ei∝⟨i|. When λi ∼= 0 we have UJ|i∝= λi|ei∝=
+|ψi∝= A|i∝. When λi = 0 we have UJ|i∝= 0 = |ψi∝. We have proved that the action of
+A and UJ agree on the basis |i∝, and thus that A = UJ.
+J is unique, since multiplying A = UJ on the left by the adjoint equation A† = JU †
+gives J2 = A†A, from which we see that J =
+↔
+A†A, uniquely. A little thought shows that
+if A is invertible, then so is J, so U is uniquely determined by the equation U = AJ−1.
+The proof of the right polar decomposition follows, since A = UJ = UJU †U = KU,
+where K ≺UJU † is a positive operator. Since AA† = KUU †K = K2 we must have
+K =
+↔
+AA†, as claimed.
+The singular value decomposition combines the polar decomposition and the spectral
+theorem.
+Corollary 2.4: (Singular value decomposition) Let A be a square matrix. Then
+there exist unitary matrices U and V , and a diagonal matrix D with
+non-negative entries such that
+A = UDV .
+(2.80)
+The diagonal elements of D are called the singular values of A.
+Proof
+By the polar decomposition, A = SJ, for unitary S, and positive J. By the spectral
+theorem, J = TDT †, for unitary T and diagonal D with non-negative entries. Setting
+U ≺ST and V ≺T † completes the proof.
+Exercise 2.48:
+What is the polar decomposition of a positive matrix P? Of a unitary
+matrix U? Of a Hermitian matrix, H?
+Exercise 2.49:
+Express the polar decomposition of a normal matrix in the outer
+product representation.
+Exercise 2.50:
+Find the left and right polar decompositions of the matrix
+! 1
+0
+1
+1
+"
+.
+(2.81)
+
+--- Page 21 ---
+80
+Introduction to quantum mechanics
+2.2
+The postulates of quantum mechanics
+All understanding begins with our not accepting the world as it appears.
+– Alan Kay
+The most incomprehensible thing about the world is that it is comprehensible.
+– Albert Einstein
+Quantum mechanics is a mathematical framework for the development of physical theo-
+ries. On its own quantum mechanics doesn’t tell you what laws a physical system must
+obey, but it does provide a mathematical and conceptual framework for the development
+of such laws. In the next few sections we give a complete description of the basic postu-
+lates of quantum mechanics. These postulates provide a connection between the physical
+world and the mathematical formalism of quantum mechanics.
+The postulates of quantum mechanics were derived after a long process of trial and
+(mostly) error, which involved a considerable amount of guessing and fumbling by the
+originators of the theory. Don’t be surprised if the motivation for the postulates is not
+always clear; even to experts the basic postulates of quantum mechanics appear surprising.
+What you should expect to gain in the next few sections is a good working grasp of the
+postulates – how to apply them, and when.
+2.2.1
+State space
+The ﬁrst postulate of quantum mechanics sets up the arena in which quantum mechanics
+takes place. The arena is our familiar friend from linear algebra, Hilbert space.
+Postulate 1: Associated to any isolated physical system is a complex vector space
+with inner product (that is, a Hilbert space) known as the state space of the
+system. The system is completely described by its state vector, which is a unit
+vector in the system’s state space.
+Quantum mechanics does not tell us, for a given physical system, what the state space
+of that system is, nor does it tell us what the state vector of the system is. Figuring that
+out for a speciﬁc system is a difﬁcult problem for which physicists have developed many
+intricate and beautiful rules. For example, there is the wonderful theory of quantum
+electrodynamics (often known as QED), which describes how atoms and light interact.
+One aspect of QED is that it tells us what state spaces to use to give quantum descriptions
+of atoms and light. We won’t be much concerned with the intricacies of theories like QED
+(except in so far as they apply to physical realizations, in Chapter 7), as we are mostly
+interested in the general framework provided by quantum mechanics. For our purposes
+it will be sufﬁcient to make some very simple (and reasonable) assumptions about the
+state spaces of the systems we are interested in, and stick with those assumptions.
+The simplest quantum mechanical system, and the system which we will be most
+concerned with, is the qubit. A qubit has a two-dimensional state space. Suppose |0∝and
+|1∝form an orthonormal basis for that state space. Then an arbitrary state vector in the
+state space can be written
+|ψ∝= a|0∝+ b|1∝,
+(2.82)
+
+--- Page 22 ---
+The postulates of quantum mechanics
+81
+where a and b are complex numbers. The condition that |ψ∝be a unit vector, ⟨ψ|ψ∝= 1,
+is therefore equivalent to |a|2 + |b|2 = 1. The condition ⟨ψ|ψ∝= 1 is often known as the
+normalization condition for state vectors.
+We will take the qubit as our fundamental quantum mechanical system. Later, in
+Chapter 7, we will see that there are real physical systems which may be described in
+terms of qubits. For now, though, it is sufﬁcient to think of qubits in abstract terms,
+without reference to a speciﬁc realization. Our discussions of qubits will always be referred
+to some orthonormal set of basis vectors, |0∝and |1∝, which should be thought of as being
+ﬁxed in advance. Intuitively, the states |0∝and |1∝are analogous to the two values 0 and
+1 which a bit may take. The way a qubit differs from a bit is that superpositions of these
+two states, of the form a|0∝+ b|1∝, can also exist, in which it is not possible to say that
+the qubit is deﬁnitely in the state |0∝, or deﬁnitely in the state |1∝.
+We conclude with some useful terminology which is often used in connection with
+the description of quantum states. We say that any linear combination #
+i αi|ψi∝is a
+superposition of the states |ψi∝with amplitude αi for the state |ψi∝. So, for example,
+the state
+|0∝∇|1∝
+↔
+2
+(2.83)
+is a superposition of the states |0∝and |1∝with amplitude 1/
+↔
+2 for the state |0∝, and
+amplitude ∇1/
+↔
+2 for the state |1∝.
+2.2.2
+Evolution
+How does the state, |ψ∝, of a quantum mechanical system change with time? The following
+postulate gives a prescription for the description of such state changes.
+Postulate 2: The evolution of a closed quantum system is described by a unitary
+transformation. That is, the state |ψ∝of the system at time t1 is related to the
+state |ψ′∝of the system at time t2 by a unitary operator U which depends only on
+the times t1 and t2,
+|ψ′∝= U|ψ∝.
+(2.84)
+Just as quantum mechanics does not tell us the state space or quantum state of a
+particular quantum system, it does not tell us which unitary operators U describe real-
+world quantum dynamics. Quantum mechanics merely assures us that the evolution of
+any closed quantum system may be described in such a way. An obvious question to ask
+is: what unitary operators are natural to consider? In the case of single qubits, it turns
+out that any unitary operator at all can be realized in realistic systems.
+Let’s look at a few examples of unitary operators on a single qubit which are impor-
+tant in quantum computation and quantum information. We have already seen several
+examples of such unitary operators – the Pauli matrices, deﬁned in Section 2.1.3, and
+the quantum gates described in Chapter 1. As remarked in Section 1.3.1, the X matrix is
+often known as the quantum
+gate, by analogy to the classical
+gate. The X and
+Z Pauli matrices are also sometimes referred to as the bit ﬂip and phase ﬂip matrices: the
+X matrix takes |0∝to |1∝, and |1∝to |0∝, thus earning the name bit ﬂip; and the Z matrix
+leaves |0∝invariant, and takes |1∝to ∇|1∝, with the extra factor of ∇1 added known as a
+phase factor, thus justifying the term phase ﬂip. We will not use the term phase ﬂip for
+
+--- Page 23 ---
+82
+Introduction to quantum mechanics
+Z very often, since it is easily confused with the phase gate to be deﬁned in Chapter 4.
+(Section 2.2.7 contains more discussion of the many uses of the term ‘phase’.)
+Another interesting unitary operator is the Hadamard gate, which we denote H. This
+has the action H|0∝≺(|0∝+|1∝)/
+↔
+2, H|1∝≺(|0∝∇|1∝)/
+↔
+2, and corresponding matrix
+representation
+H =
+1
+↔
+2
+! 1
+1
+1
+∇1
+"
+.
+(2.85)
+Exercise 2.51:
+Verify that the Hadamard gate H is unitary.
+Exercise 2.52:
+Verify that H2 = I.
+Exercise 2.53:
+What are the eigenvalues and eigenvectors of H?
+Postulate 2 requires that the system being described be closed. That is, it is not
+interacting in any way with other systems. In reality, of course, all systems (except the
+Universe as a whole) interact at least somewhat with other systems. Nevertheless, there
+are interesting systems which can be described to a good approximation as being closed,
+and which are described by unitary evolution to some good approximation. Furthermore,
+at least in principle every open system can be described as part of a larger closed system
+(the Universe) which is undergoing unitary evolution. Later, we’ll introduce more tools
+which allow us to describe systems which are not closed, but for now we’ll continue with
+the description of the evolution of closed systems.
+Postulate 2 describes how the quantum states of a closed quantum system at two
+different times are related. A more reﬁned version of this postulate can be given which
+describes the evolution of a quantum system in continuous time. From this more reﬁned
+postulate we will recover Postulate 2. Before we state the revised postulate, it is worth
+pointing out two things. First, a notational remark. The operator H appearing in the
+following discussion is not the same as the Hadamard operator, which we just introduced.
+Second, the following postulate makes use of the apparatus of differential equations.
+Readers with little background in the study of differential equations should be reassured
+that they will not be necessary for much of the book, with the exception of parts of
+Chapter 7, on real physical implementations of quantum information processing.
+Postulate 2′: The time evolution of the state of a closed quantum system is
+described by the Schr¨odinger equation,
+iℏd|ψ∝
+dt
+= H|ψ∝.
+(2.86)
+In this equation, ℏis a physical constant known as Planck’s constant whose value
+must be experimentally determined. The exact value is not important to us. In
+practice, it is common to absorb the factor ℏinto H, effectively setting ℏ= 1. H
+is a ﬁxed Hermitian operator known as the Hamiltonian of the closed system.
+If we know the Hamiltonian of a system, then (together with a knowledge of ℏ) we
+understand its dynamics completely, at least in principle. In general ﬁguring out the
+Hamiltonian needed to describe a particular physical system is a very difﬁcult problem
+– much of twentieth century physics has been concerned with this problem – which
+requires substantial input from experiment in order to be answered. From our point of
+
+--- Page 24 ---
+The postulates of quantum mechanics
+83
+view this is a problem of detail to be addressed by physical theories built within the
+framework of quantum mechanics – what Hamiltonian do we need to describe atoms
+in such-and-such a conﬁguration – and is not a question that needs to be addressed by
+the theory of quantum mechanics itself. Most of the time in our discussion of quantum
+computation and quantum information we won’t need to discuss Hamiltonians, and when
+we do, we will usually just posit that some matrix is the Hamiltonian as a starting point,
+and proceed from there, without attempting to justify the use of that Hamiltonian.
+Because the Hamiltonian is a Hermitian operator it has a spectral decomposition
+H =
+⎬
+E
+E|E∝⟨E|,
+(2.87)
+with eigenvalues E and corresponding normalized eigenvectors |E∝. The states |E∝are
+conventionally referred to as energy eigenstates, or sometimes as stationary states, and
+E is the energy of the state |E∝. The lowest energy is known as the ground state energy
+for the system, and the corresponding energy eigenstate (or eigenspace) is known as the
+ground state. The reason the states |E∝are sometimes known as stationary states is
+because their only change in time is to acquire an overall numerical factor,
+|E∝⊂exp(∇iEt/ℏ)|E∝.
+(2.88)
+As an example, suppose a single qubit has Hamiltonian
+H = ℏωX.
+(2.89)
+In this equation ω is a parameter that, in practice, needs to be experimentally determined.
+We won’t worry about the parameter overly much here – the point is to give you a feel
+for the sort of Hamiltonians that are sometimes written down in the study of quantum
+computation and quantum information. The energy eigenstates of this Hamiltonian are
+obviously the same as the eigenstates of X, namely (|0∝+ |1∝)/
+↔
+2 and (|0∝∇|1∝)/
+↔
+2,
+with corresponding energies ℏω and ∇ℏω. The ground state is therefore (|0∝∇|1∝)/
+↔
+2,
+and the ground state energy is ∇ℏω.
+What is the connection between the Hamiltonian picture of dynamics, Postulate 2′,
+and the unitary operator picture, Postulate 2? The answer is provided by writing down
+the solution to Schr¨odinger’s equation, which is easily veriﬁed to be:
+|ψ(t2)∝= exp
+!∇iH(t2 ∇t1)
+ℏ
+"
+|ψ(t1)∝= U(t1, t2)|ψ(t1)∝,
+(2.90)
+where we deﬁne
+U(t1, t2) ≺exp
+!∇iH(t2 ∇t1)
+ℏ
+"
+.
+(2.91)
+You will show in the exercises that this operator is unitary, and furthermore, that any
+unitary operator U can be realized in the form U = exp(iK) for some Hermitian operator
+K. There is therefore a one-to-one correspondence between the discrete-time description
+of dynamics using unitary operators, and the continuous time description using Hamil-
+tonians. For most of the book we use the unitary formulation of quantum dynamics.
+Exercise 2.54:
+Suppose A and B are commuting Hermitian operators. Prove that
+exp(A) exp(B) = exp(A + B). (Hint: Use the results of Section 2.1.9.)
+
+--- Page 25 ---
+84
+Introduction to quantum mechanics
+Exercise 2.55:
+Prove that U(t1, t2) deﬁned in Equation (2.91) is unitary.
+Exercise 2.56:
+Use the spectral decomposition to show that K ≺∇i log(U) is
+Hermitian for any unitary U, and thus U = exp(iK) for some Hermitian K.
+In quantum computation and quantum information we often speak of applying a
+unitary operator to a particular quantum system. For example, in the context of quantum
+circuits we may speak of applying the unitary gate X to a single qubit. Doesn’t this
+contradict what we said earlier, about unitary operators describing the evolution of a
+closed quantum system? After all, if we are ‘applying’ a unitary operator, then that
+implies that there is an external ‘we’ who is interacting with the quantum system, and
+the system is not closed.
+An example of this occurs when a laser is focused on an atom. After a lot of thought
+and hard work it is possible to write down a Hamiltonian describing the total atom–
+laser system. The interesting thing is that when we write down the Hamiltonian for the
+atom–laser system and consider the effects on the atom alone, the behavior of the state
+vector of the atom turns out to be almost but not quite perfectly described by another
+Hamiltonian, the atomic Hamiltonian. The atomic Hamiltonian contains terms related
+to laser intensity, and other parameters of the laser, which we can vary at will. It is as if
+the evolution of the atom were being described by a Hamiltonian which we can vary at
+will, despite the atom not being a closed system.
+More generally, for many systems like this it turns out to be possible to write down
+a time-varying Hamiltonian for a quantum system, in which the Hamiltonian for the
+system is not a constant, but varies according to some parameters which are under an
+experimentalist’s control, and which may be changed during the course of an experi-
+ment. The system is not, therefore, closed, but it does evolve according to Schr¨odinger’s
+equation with a time-varying Hamiltonian, to some good approximation.
+The upshot is that to begin we will often describe the evolution of quantum systems –
+even systems which aren’t closed – using unitary operators. The main exception to this,
+quantum measurement, will be described in the next section. Later on we will investigate
+in more detail possible deviations from unitary evolution due to the interaction with other
+systems, and understand more precisely the dynamics of realistic quantum systems.
+2.2.3
+Quantum measurement
+We postulated that closed quantum systems evolve according to unitary evolution. The
+evolution of systems which don’t interact with the rest of the world is all very well, but
+there must also be times when the experimentalist and their experimental equipment –
+an external physical system in other words – observes the system to ﬁnd out what is
+going on inside the system, an interaction which makes the system no longer closed, and
+thus not necessarily subject to unitary evolution. To explain what happens when this
+is done, we introduce Postulate 3, which provides a means for describing the effects of
+measurements on quantum systems.
+Postulate 3: Quantum measurements are described by a collection {Mm} of
+measurement operators. These are operators acting on the state space of the
+system being measured. The index m refers to the measurement outcomes that
+may occur in the experiment. If the state of the quantum system is |ψ∝
+immediately before the measurement then the probability that result m occurs is
+
+--- Page 26 ---
+The postulates of quantum mechanics
+85
+given by
+p(m) = ⟨ψ|M †
+mMm|ψ∝,
+(2.92)
+and the state of the system after the measurement is
+Mm|ψ∝
+1
+⟨ψ|M †
+mMm|ψ∝
+.
+(2.93)
+The measurement operators satisfy the completeness equation,
+⎬
+m
+M †
+mMm = I .
+(2.94)
+The completeness equation expresses the fact that probabilities sum to one:
+1 =
+⎬
+m
+p(m) =
+⎬
+m
+⟨ψ|M †
+mMm|ψ∝.
+(2.95)
+This equation being satisﬁed for all |ψ∝is equivalent to the completeness equation.
+However, the completeness equation is much easier to check directly, so that’s why it
+appears in the statement of the postulate.
+A simple but important example of a measurement is the measurement of a qubit in
+the computational basis. This is a measurement on a single qubit with two outcomes
+deﬁned by the two measurement operators M0 = |0∝⟨0|, M1 = |1∝⟨1|. Observe that
+each measurement operator is Hermitian, and that M 2
+0 = M0, M 2
+1 = M1. Thus the
+completeness relation is obeyed, I = M †
+0 M0 + M †
+1 M1 = M0 + M1. Suppose the state
+being measured is |ψ∝= a|0∝+ b|1∝. Then the probability of obtaining measurement
+outcome 0 is
+p(0) = ⟨ψ|M †
+0 M0|ψ∝= ⟨ψ|M0|ψ∝= |a|2.
+(2.96)
+Similarly, the probability of obtaining the measurement outcome 1 is p(1) = |b|2. The
+state after measurement in the two cases is therefore
+M0|ψ∝
+|a|
+= a
+|a||0∝
+(2.97)
+M1|ψ∝
+|b|
+= b
+|b||1∝.
+(2.98)
+We will see in Section 2.2.7 that multipliers like a/|a|, which have modulus one, can
+effectively be ignored, so the two post-measurement states are effectively |0∝and |1∝, just
+as described in Chapter 1.
+The status of Postulate 3 as a fundamental postulate intrigues many people. Measuring
+devices are quantum mechanical systems, so the quantum system being measured and
+the measuring device together are part of a larger, isolated, quantum mechanical system.
+(It may be necessary to include quantum systems other than the system being measured
+and the measuring device to obtain a completely isolated system, but the point is that
+this can be done.) According to Postulate 2, the evolution of this larger isolated system
+can be described by a unitary evolution. Might it be possible to derive Postulate 3 as a
+consequence of this picture? Despite considerable investigation along these lines there is
+still disagreement between physicists about whether or not this is possible. We, however,
+are going to take the very pragmatic approach that in practice it is clear when to apply
+
+--- Page 27 ---
+86
+Introduction to quantum mechanics
+Postulate 2 and when to apply Postulate 3, and not worry about deriving one postulate
+from the other.
+Over the next few sections we apply Postulate 3 to several elementary but important
+measurement scenarios. Section 2.2.4 examines the problem of distinguishing a set of
+quantum states. Section 2.2.5 explains a special case of Postulate 3, the projective or
+von Neumann measurements. Section 2.2.6 explains another special case of Postulate 3,
+known as POVM measurements. Many introductions to quantum mechanics only discuss
+projective measurements, omitting a full discussion of Postulate 3 or of POVM elements.
+For this reason we have included Box 2.5 on page 91 which comments on the relationship
+between the different classes of measurement we describe.
+Exercise 2.57: (Cascaded measurements are single measurements)
+Suppose
+{Ll} and {Mm} are two sets of measurement operators. Show that a
+measurement deﬁned by the measurement operators {Ll} followed by a
+measurement deﬁned by the measurement operators {Mm} is physically
+equivalent to a single measurement deﬁned by measurement operators {Nlm}
+with the representation Nlm ≺MmLl.
+2.2.4
+Distinguishing quantum states
+An important application of Postulate 3 is to the problem of distinguishing quantum
+states. In the classical world, distinct states of an object are usually distinguishable, at
+least in principle. For example, we can always identify whether a coin has landed heads or
+tails, at least in the ideal limit. Quantum mechanically, the situation is more complicated.
+In Section 1.6 we gave a plausible argument that non-orthogonal quantum states cannot
+be distinguished. With Postulate 3 as a ﬁrm foundation we can now give a much more
+convincing demonstration of this fact.
+Distinguishability, like many ideas in quantum computation and quantum information,
+is most easily understood using the metaphor of a game involving two parties, Alice and
+Bob. Alice chooses a state |ψi∝(1 ≤i ≤n) from some ﬁxed set of states known to both
+parties. She gives the state |ψi∝to Bob, whose task it is to identify the index i of the
+state Alice has given him.
+Suppose the states |ψi∝are orthonormal. Then Bob can do a quantum measurement
+to distinguish these states, using the following procedure. Deﬁne measurement operators
+Mi ≺|ψi∝⟨ψi|, one for each possible index i, and an additional measurement operator
+M0 deﬁned as the positive square root of the positive operator I ∇#
+i ∼= 0 |ψi∝⟨ψi|.
+These operators satisfy the completeness relation, and if the state |ψi∝is prepared then
+p(i) = ⟨ψi|Mi|ψi∝= 1, so the result i occurs with certainty. Thus, it is possible to
+reliably distinguish the orthonormal states |ψi∝.
+By contrast, if the states |ψi∝are not orthonormal then we can prove that there is no
+quantum measurement capable of distinguishing the states. The idea is that Bob will do
+a measurement described by measurement operators Mj, with outcome j. Depending on
+the outcome of the measurement Bob tries to guess what the index i was using some rule,
+i = f(j), where f(·) represents the rule he uses to make the guess. The key to why Bob
+can’t distinguish non-orthogonal states |ψ1∝and |ψ2∝is the observation that |ψ2∝can be
+decomposed into a (non-zero) component parallel to |ψ1∝, and a component orthogonal
+to |ψ1∝. Suppose j is a measurement outcome such that f(j) = 1, that is, Bob guesses
+that the state was |ψ1∝when he observes j. But because of the component of |ψ2∝parallel
+
+--- Page 28 ---
+The postulates of quantum mechanics
+87
+to |ψ1∝, there is a non-zero probability of getting outcome j when |ψ2∝is prepared, so
+sometimes Bob will make an error identifying which state was prepared. A more rigorous
+argument that non-orthogonal states can’t be distinguished is given in Box 2.3, but this
+captures the essential idea.
+Box 2.3: Proof that non-orthogonal states can’t be reliably distinguished
+A proof by contradiction shows that no measurement distinguishing the non-
+orthogonal states |ψ1∝and |ψ2∝is possible. Suppose such a measurement is possible.
+If the state |ψ1∝(|ψ2∝) is prepared then the probability of measuring j such that
+f(j) = 1 (f(j) = 2) must be 1. Deﬁning Ei ≺#
+j:f(j)=i M †
+j Mj, these observations
+may be written as:
+⟨ψ1|E1|ψ1∝= 1;
+⟨ψ2|E2|ψ2∝= 1.
+(2.99)
+Since #
+i Ei = I it follows that #
+i⟨ψ1|Ei|ψ1∝= 1, and since ⟨ψ1|E1|ψ1∝= 1
+we must have ⟨ψ1|E2|ψ1∝= 0, and thus ↔E2|ψ1∝= 0. Suppose we decompose
+|ψ2∝= α|ψ1∝+β|ϕ∝, where |ϕ∝is orthonormal to |ψ1∝, |α|2 +|β|2 = 1, and |β| < 1
+since |ψ1∝and |ψ2∝are not orthogonal. Then ↔E2|ψ2∝= β↔E2|ϕ∝, which implies
+a contradiction with (2.99), as
+⟨ψ2|E2|ψ2∝= |β|2⟨ϕ|E2|ϕ∝≤|β|2 < 1,
+(2.100)
+where the second last inequality follows from the observation that
+⟨ϕ|E2|ϕ∝≤
+⎬
+i
+⟨ϕ|Ei|ϕ∝= ⟨ϕ|ϕ∝= 1.
+(2.101)
+2.2.5
+Projective measurements
+In this section we explain an important special case of the general measurement postulate,
+Postulate 3. This special class of measurements is known as projective measurements.
+For many applications of quantum computation and quantum information we will be
+concerned primarily with projective measurements. Indeed, projective measurements ac-
+tually turn out to be equivalent to the general measurement postulate, when they are
+augmented with the ability to perform unitary transformations, as described in Postu-
+late 2. We will explain this equivalence in detail in Section 2.2.8, as the statement of the
+measurement postulate for projective measurements is superﬁcially rather different from
+the general postulate, Postulate 3.
+Projective measurements: A projective measurement is described by an
+observable, M, a Hermitian operator on the state space of the system being
+observed. The observable has a spectral decomposition,
+M =
+⎬
+m
+mPm ,
+(2.102)
+where Pm is the projector onto the eigenspace of M with eigenvalue m. The
+possible outcomes of the measurement correspond to the eigenvalues, m, of the
+observable. Upon measuring the state |ψ∝, the probability of getting result m is
+
+--- Page 29 ---
+88
+Introduction to quantum mechanics
+given by
+p(m) = ⟨ψ|Pm|ψ⟩.
+(2.103)
+Given that outcome m occurred, the state of the quantum system immediately
+after the measurement is
+Pm|ψ⟩
+√p(m) .
+(2.104)
+Projective measurements can be understood as a special case of Postulate 3. Suppose the
+measurement operators in Postulate 3, in addition to satisfying the completeness relation
+!
+m M †
+mMm = I, also satisfy the conditions that Mm are orthogonal projectors, that is,
+the Mm are Hermitian, and MmMm′ = δm,m′Mm. With these additional restrictions,
+Postulate 3 reduces to a projective measurement as just deﬁned.
+Projective measurements have many nice properties. In particular, it is very easy to
+calculate average values for projective measurements. By deﬁnition, the average (see
+Appendix 1 for elementary deﬁnitions and results in probability theory) value of the
+measurement is
+E(M) =
+"
+m
+m p(m)
+(2.110)
+=
+"
+m
+m⟨ψ|Pm|ψ⟩
+(2.111)
+= ⟨ψ|
+#"
+m
+mPm
+$
+|ψ⟩
+(2.112)
+= ⟨ψ|M|ψ⟩.
+(2.113)
+This is a useful formula, which simpliﬁes many calculations. The average value of the
+observable M is often written ⟨M⟩≡⟨ψ|M|ψ⟩. From this formula for the average
+follows a formula for the standard deviation associated to observations of M,
+[∆(M)]2 = ⟨(M −⟨M⟩)2⟩
+(2.114)
+= ⟨M 2⟩−⟨M⟩2.
+(2.115)
+The standard deviation is a measure of the typical spread of the observed values upon mea-
+surement of M. In particular, if we perform a large number of experiments in which the
+state |ψ⟩is prepared and the observable M is measured, then the standard deviation ∆(M)
+of the observed values is determined by the formula ∆(M) =
+%
+⟨M 2⟩−⟨M⟩2. This for-
+mulation of measurement and standard deviations in terms of observables gives rise in
+an elegant way to results such as the Heisenberg uncertainty principle (see Box 2.4).
+Exercise 2.58:
+Suppose we prepare a quantum system in an eigenstate |ψ⟩of some
+observable M, with corresponding eigenvalue m. What is the average observed
+value of M, and the standard deviation?
+Two widely used nomenclatures for measurements deserve emphasis. Rather than giv-
+ing an observable to describe a projective measurement, often people simply list a com-
+plete set of orthogonal projectors Pm satisfying the relations !
+m Pm = I and PmPm′ =
+
+--- Page 30 ---
+The postulates of quantum mechanics
+89
+Box 2.4: The Heisenberg uncertainty principle
+Perhaps the best known result of quantum mechanics is the Heisenberg uncer-
+tainty principle. Suppose A and B are two Hermitian operators, and |ψ∝is a
+quantum state. Suppose ⟨ψ|AB|ψ∝= x + iy, where x and y are real. Note that
+⟨ψ|[A, B]|ψ∝= 2iy and ⟨ψ|{A, B}|ψ∝= 2x. This implies that
+|⟨ψ|[A, B]|ψ∝|2 + |⟨ψ|{A, B}|ψ∝|2 = 4 |⟨ψ|AB|ψ∝|2 .
+(2.105)
+By the Cauchy–Schwarz inequality
+|⟨ψ|AB|ψ∝|2 ≤⟨ψ|A2|ψ∝⟨ψ|B2|ψ∝,
+(2.106)
+which combined with Equation (2.105) and dropping a non-negative term gives
+|⟨ψ|[A, B]|ψ∝|2 ≤4⟨ψ|A2|ψ∝⟨ψ|B2|ψ∝.
+(2.107)
+Suppose C and D are two observables. Substituting A = C∇⟨C∝and B = D∇⟨D∝
+into the last equation, we obtain Heisenberg’s uncertainty principle as it is usually
+stated:
+!(C)!(D) ∩|⟨ψ|[C, D]|ψ∝|
+2
+.
+(2.108)
+You should be wary of a common misconception about the uncertainty principle,
+that measuring an observable C to some ‘accuracy’ !(C) causes the value of D to
+be ‘disturbed’ by an amount !(D) in such a way that some sort of inequality similar
+to (2.108) is satisﬁed. While it is true that measurements in quantum mechanics
+cause disturbance to the system being measured, this is most emphatically not the
+content of the uncertainty principle.
+The correct interpretation of the uncertainty principle is that if we prepare a large
+number of quantum systems in identical states, |ψ∝, and then perform measurements
+of C on some of those systems, and of D in others, then the standard deviation
+!(C) of the C results times the standard deviation !(D) of the results for D will
+satisfy the inequality (2.108).
+As an example of the uncertainty principle, consider the observables X and Y
+when measured for the quantum state |0∝. In Equation (2.70) we showed that
+[X, Y ] = 2iZ, so the uncertainty principle tells us that
+!(X)!(Y ) ∩⟨0|Z|0∝= 1 .
+(2.109)
+One elementary consequence of this is that !(X) and !(Y ) must both be strictly
+greater than 0, as can be veriﬁed by direct calculation.
+δmm′Pm. The corresponding observable implicit in this usage is M = #
+m mPm. An-
+other widely used phrase, to ‘measure in a basis |m∝’, where |m∝form an orthonormal ba-
+sis, simply means to perform the projective measurement with projectors Pm = |m∝⟨m|.
+Let’s look at an example of projective measurements on single qubits. First is the
+measurement of the observable Z. This has eigenvalues +1 and ∇1 with corresponding
+eigenvectors |0∝and |1∝. Thus, for example, measurement of Z on the state |ψ∝=
+(|0∝+ |1∝)/
+↔
+2 gives the result +1 with probability ⟨ψ|0∝⟨0|ψ∝= 1/2, and similarly the
+
+--- Page 31 ---
+90
+Introduction to quantum mechanics
+result ∇1 with probability 1/2. More generally, suppose ⃗v is any real three-dimensional
+unit vector. Then we can deﬁne an observable:
+⃗v · ⃗σ ≺v1σ1 + v2σ2 + v3σ3.
+(2.116)
+Measurement of this observable is sometimes referred to as a ‘measurement of spin along
+the ⃗v axis’, for historical reasons. The following two exercises encourage you to work out
+some elementary but important properties of such a measurement.
+Exercise 2.59:
+Suppose we have qubit in the state |0∝, and we measure the observable
+X. What is the average value of X? What is the standard deviation of X?
+Exercise 2.60:
+Show that ⃗v · ⃗σ has eigenvalues ±1, and that the projectors onto the
+corresponding eigenspaces are given by P± = (I ± ⃗v · ⃗σ)/2.
+Exercise 2.61:
+Calculate the probability of obtaining the result +1 for a measurement
+of ⃗v · ⃗σ, given that the state prior to measurement is |0∝. What is the state of the
+system after the measurement if +1 is obtained?
+2.2.6
+POVM measurements
+The quantum measurement postulate, Postulate 3, involves two elements. First, it gives
+a rule describing the measurement statistics, that is, the respective probabilities of the
+different possible measurement outcomes. Second, it gives a rule describing the post-
+measurement state of the system. However, for some applications the post-measurement
+state of the system is of little interest, with the main item of interest being the probabilities
+of the respective measurement outcomes. This is the case, for example, in an experiment
+where the system is measured only once, upon conclusion of the experiment. In such
+instances there is a mathematical tool known as the POVM formalism which is especially
+well adapted to the analysis of the measurements. (The acronym POVM stands for
+‘Positive Operator-Valued Measure’, a technical term whose historical origins we won’t
+worry about.) This formalism is a simple consequence of the general description of
+measurements introduced in Postulate 3, but the theory of POVMs is so elegant and
+widely used that it merits a separate discussion here.
+Suppose a measurement described by measurement operators Mm is performed upon
+a quantum system in the state |ψ∝. Then the probability of outcome m is given by
+p(m) = ⟨ψ|M †
+mMm|ψ∝. Suppose we deﬁne
+Em ≺M †
+mMm.
+(2.117)
+Then from Postulate 3 and elementary linear algebra, Em is a positive operator such
+that #
+m Em = I and p(m) = ⟨ψ|Em|ψ∝. Thus the set of operators Em are sufﬁcient to
+determine the probabilities of the different measurement outcomes. The operators Em
+are known as the POVM elements associated with the measurement. The complete set
+{Em} is known as a POVM.
+As an example of a POVM, consider a projective measurement described by mea-
+surement operators Pm, where the Pm are projectors such that PmPm′ = δmm′Pm and
+#
+m Pm = I. In this instance (and only this instance) all the POVM elements are the
+same as the measurement operators themselves, since Em ≺P †
+mPm = Pm.
+
+--- Page 32 ---
+The postulates of quantum mechanics
+91
+Box 2.5: General measurements, projective measurements, and POVMs
+Most introductions to quantum mechanics describe only projective measurements,
+and consequently the general description of measurements given in Postulate 3
+may be unfamiliar to many physicists, as may the POVM formalism described in
+Section 2.2.6. The reason most physicists don’t learn the general measurement
+formalism is because most physical systems can only be measured in a very coarse
+manner. In quantum computation and quantum information we aim for an exquisite
+level of control over the measurements that may be done, and consequently it helps
+to use a more comprehensive formalism for the description of measurements.
+Of course, when the other axioms of quantum mechanics are taken into account,
+projective measurements augmented by unitary operations turn out to be completely
+equivalent to general measurements, as shown in Section 2.2.8. So a physicist
+trained in the use of projective measurements might ask to what end we start with
+the general formalism, Postulate 3? There are several reasons for doing so. First,
+mathematically general measurements are in some sense simpler than projective
+measurements, since they involve fewer restrictions on the measurement operators;
+there is, for example, no requirement for general measurements analogous to the
+condition PiPj = δijPi for projective measurements. This simpler structure also
+gives rise to many useful properties for general measurements that are not possessed
+by projective measurements. Second, it turns out that there are important problems
+in quantum computation and quantum information – such as the optimal way
+to distinguish a set of quantum states – the answer to which involves a general
+measurement, rather than a projective measurement.
+A third reason for preferring Postulate 3 as a starting point is related to a property
+of projective measurements known as repeatability. Projective measurements are
+repeatable in the sense that if we perform a projective measurement once, and
+obtain the outcome m, repeating the measurement gives the outcome m again and
+does not change the state. To see this, suppose |ψ∝was the initial state. After the
+ﬁrst measurement the state is |ψm∝=
+A
+Pm|ψ∝
+B
+/
+6
+⟨ψ|Pm|ψ∝. Applying Pm to
+|ψm∝does not change it, so we have ⟨ψm|Pm|ψm∝= 1, and therefore repeated
+measurement gives the result m each time, without changing the state.
+This repeatability of projective measurements tips us off to the fact that many
+important measurements in quantum mechanics are not projective measurements.
+For instance, if we use a silvered screen to measure the position of a photon we
+destroy the photon in the process. This certainly makes it impossible to repeat
+the measurement of the photon’s position! Many other quantum measurements
+are also not repeatable in the same sense as a projective measurement. For such
+measurements, the general measurement postulate, Postulate 3, must be employed.
+Where do POVMs ﬁt in this picture? POVMs are best viewed as a special case
+of the general measurement formalism, providing the simplest means by which
+one can study general measurement statistics, without the necessity for knowing
+the post-measurement state. They are a mathematical convenience that sometimes
+gives extra insight into quantum measurements.
+
+--- Page 33 ---
+92
+Introduction to quantum mechanics
+Exercise 2.62:
+Show that any measurement where the measurement operators and the
+POVM elements coincide is a projective measurement.
+Above we noticed that the POVM operators are positive and satisfy #
+m Em = I.
+Suppose now that {Em} is some arbitrary set of positive operators such that #
+m Em = I.
+We will show that there exists a set of measurement operators Mm deﬁning a measurement
+described by the POVM {Em}. Deﬁning Mm ≺↔Em we see that #
+m M †
+mMm =
+#
+m Em = I, and therefore the set {Mm} describes a measurement with POVM {Em}.
+For this reason it is convenient to deﬁne a POVM to be any set of operators {Em} such
+that: (a) each operator Em is positive; and (b) the completeness relation #
+m Em = I is
+obeyed, expressing the fact that probabilities sum to one. To complete the description
+of POVMs, we note again that given a POVM {Em}, the probability of outcome m is
+given by p(m) = ⟨ψ|Em|ψ∝.
+We’ve looked at projective measurements as an example of the use of POVMs, but
+it wasn’t very exciting since we didn’t learn much that was new. The following more
+sophisticated example illustrates the use of the POVM formalism as a guide for our
+intuition in quantum computation and quantum information. Suppose Alice gives Bob a
+qubit prepared in one of two states, |ψ1∝= |0∝or |ψ2∝= (|0∝+ |1∝)/
+↔
+2. As explained in
+Section 2.2.4 it is impossible for Bob to determine whether he has been given |ψ1∝or |ψ2∝
+with perfect reliability. However, it is possible for him to perform a measurement which
+distinguishes the states some of the time, but never makes an error of mis-identiﬁcation.
+Consider a POVM containing three elements,
+E1 ≺
+↔
+2
+1 +
+↔
+2
+|1∝⟨1|,
+(2.118)
+E2 ≺
+↔
+2
+1 +
+↔
+2
+'|0∝∇|1∝
+( '⟨0| ∇⟨1|
+(
+2
+,
+(2.119)
+E3 ≺I ∇E1 ∇E2.
+(2.120)
+It is straightforward to verify that these are positive operators which satisfy the com-
+pleteness relation #
+m Em = I, and therefore form a legitimate POVM.
+Suppose Bob is given the state |ψ1∝= |0∝. He performs the measurement described
+by the POVM {E1, E2, E3}. There is zero probability that he will observe the result
+E1, since E1 has been cleverly chosen to ensure that ⟨ψ1|E1|ψ1∝= 0. Therefore, if the
+result of his measurement is E1 then Bob can safely conclude that the state he received
+must have been |ψ2∝. A similar line of reasoning shows that if the measurement outcome
+E2 occurs then it must have been the state |ψ1∝that Bob received. Some of the time,
+however, Bob will obtain the measurement outcome E3, and he can infer nothing about
+the identity of the state he was given. The key point, however, is that Bob never makes a
+mistake identifying the state he has been given. This infallibility comes at the price that
+sometimes Bob obtains no information about the identity of the state.
+This simple example demonstrates the utility of the POVM formalism as a simple
+and intuitive way of gaining insight into quantum measurements in instances where
+only the measurement statistics matter. In many instances later in the book we will only
+be concerned with measurement statistics, and will therefore use the POVM formalism
+rather than the more general formalism for measurements described in Postulate 3.
+Exercise 2.63:
+Suppose a measurement is described by measurement operators Mm.
+
+--- Page 34 ---
+The postulates of quantum mechanics
+93
+Show that there exist unitary operators Um such that Mm = Um
+↔Em, where
+Em is the POVM associated to the measurement.
+Exercise 2.64:
+Suppose Bob is given a quantum state chosen from a set |ψ1∝, . . ., |ψm∝
+of linearly independent states. Construct a POVM {E1, E2, . . . , Em+1} such that
+if outcome Ei occurs, 1 ≤i ≤m, then Bob knows with certainty that he was
+given the state |ψi∝. (The POVM must be such that ⟨ψi|Ei|ψi∝> 0 for each i.)
+2.2.7
+Phase
+‘Phase’ is a commonly used term in quantum mechanics, with several different mean-
+ings dependent upon context. At this point it is convenient to review a couple of these
+meanings. Consider, for example, the state eiθ|ψ∝, where |ψ∝is a state vector, and θ is a
+real number. We say that the state eiθ|ψ∝is equal to |ψ∝, up to the global phase factor
+eiθ. It is interesting to note that the statistics of measurement predicted for these two
+states are the same. To see this, suppose Mm is a measurement operator associated to
+some quantum measurement, and note that the respective probabilities for outcome m
+occurring are ⟨ψ|M †
+mMm|ψ∝and ⟨ψ|e−iθM †
+mMmeiθ|ψ∝= ⟨ψ|M †
+mMm|ψ∝. Therefore,
+from an observational point of view these two states are identical. For this reason we may
+ignore global phase factors as being irrelevant to the observed properties of the physical
+system.
+There is another kind of phase known as the relative phase, which has quite a different
+meaning. Consider the states
+|0∝+ |1∝
+↔
+2
+and
+|0∝∇|1∝
+↔
+2
+.
+(2.121)
+In the ﬁrst state the amplitude of |1∝is 1/
+↔
+2. For the second state the amplitude is
+∇1/
+↔
+2. In each case the magnitude of the amplitudes is the same, but they differ in
+sign. More generally, we say that two amplitudes, a and b, differ by a relative phase if
+there is a real θ such that a = exp(iθ)b. More generally still, two states are said to differ
+by a relative phase in some basis if each of the amplitudes in that basis is related by such
+a phase factor. For example, the two states displayed above are the same up to a relative
+phase shift because the |0∝amplitudes are identical (a relative phase factor of 1), and
+the |1∝amplitudes differ only by a relative phase factor of ∇1. The difference between
+relative phase factors and global phase factors is that for relative phase the phase factors
+may vary from amplitude to amplitude. This makes the relative phase a basis-dependent
+concept unlike global phase. As a result, states which differ only by relative phases in
+some basis give rise to physically observable differences in measurement statistics, and
+it is not possible to regard these states as physically equivalent, as we do with states
+differing by a global phase factor
+Exercise 2.65:
+Express the states (|0∝+ |1∝)/
+↔
+2 and (|0∝∇|1∝)/
+↔
+2 in a basis in
+which they are not the same up to a relative phase shift.
+2.2.8
+Composite systems
+Suppose we are interested in a composite quantum system made up of two (or more)
+distinct physical systems. How should we describe states of the composite system? The
+following postulate describes how the state space of a composite system is built up from
+the state spaces of the component systems.
+
+--- Page 35 ---
+94
+Introduction to quantum mechanics
+Postulate 4: The state space of a composite physical system is the tensor product
+of the state spaces of the component physical systems. Moreover, if we have
+systems numbered 1 through n, and system number i is prepared in the state
+|ψi∝, then the joint state of the total system is |ψ1∝◦|ψ2∝◦· · · ◦|ψn∝.
+Why is the tensor product the mathematical structure used to describe the state space of
+a composite physical system? At one level, we can simply accept it as a basic postulate, not
+reducible to something more elementary, and move on. After all, we certainly expect that
+there be some canonical way of describing composite systems in quantum mechanics.
+Is there some other way we can arrive at this postulate? Here is one heuristic that is
+sometimes used. Physicists sometimes like to speak of the superposition principle of
+quantum mechanics, which states that if |x∝and |y∝are two states of a quantum system,
+then any superposition α|x∝+ β|y∝should also be an allowed state of a quantum system,
+where |α|2 + |β|2 = 1. For composite systems, it seems natural that if |A∝is a state of
+system A, and |B∝is a state of system B, then there should be some corresponding state,
+which we might denote |A∝|B∝, of the joint system AB. Applying the superposition
+principle to product states of this form, we arrive at the tensor product postulate given
+above. This is not a derivation, since we are not taking the superposition principle as a
+fundamental part of our description of quantum mechanics, but it gives you the ﬂavor of
+the various ways in which these ideas are sometimes reformulated.
+A variety of different notations for composite systems appear in the literature. Part of
+the reason for this proliferation is that different notations are better adapted for different
+applications, and we will also ﬁnd it convenient to introduce some specialized notations
+on occasion. At this point it sufﬁces to mention a useful subscript notation to denote
+states and operators on different systems, when it is not clear from context. For example,
+in a system containing three qubits, X2 is the Pauli σx operator acting on the second
+qubit.
+Exercise 2.66:
+Show that the average value of the observable X1Z2 for a two qubit
+system measured in the state (|00∝+ |11∝)/
+↔
+2 is zero.
+In Section 2.2.5 we claimed that projective measurements together with unitary dy-
+namics are sufﬁcient to implement a general measurement. The proof of this statement
+makes use of composite quantum systems, and is a nice illustration of Postulate 4 in
+action. Suppose we have a quantum system with state space Q, and we want to per-
+form a measurement described by measurement operators Mm on the system Q. To do
+this, we introduce an ancilla system, with state space M, having an orthonormal basis
+|m∝in one-to-one correspondence with the possible outcomes of the measurement we
+wish to implement. This ancilla system can be regarded as merely a mathematical device
+appearing in the construction, or it can be interpreted physically as an extra quantum
+system introduced into the problem, which we assume has a state space with the required
+properties.
+Letting |0∝be any ﬁxed state of M, deﬁne an operator U on products |ψ∝|0∝of states
+|ψ∝from Q with the state |0∝by
+U|ψ∝|0∝≺
+⎬
+m
+Mm|ψ∝|m∝.
+(2.122)
+Using the orthonormality of the states |m∝and the completeness relation #
+m M †
+mMm =
+
+--- Page 36 ---
+The postulates of quantum mechanics
+95
+I, we can see that U preserves inner products between states of the form |ψ∝|0∝,
+⟨ϕ|⟨0|U †U|ψ∝|0∝=
+⎬
+m,m′
+⟨ϕ|M †
+mMm′|ψ∝⟨m|m′∝
+(2.123)
+=
+⎬
+m
+⟨ϕ|M †
+mMm|ψ∝
+(2.124)
+= ⟨ϕ|ψ∝.
+(2.125)
+By the results of Exercise 2.67 it follows that U can be extended to a unitary operator on
+the space Q ◦M, which we also denote by U.
+Exercise 2.67:
+Suppose V is a Hilbert space with a subspace W. Suppose
+U : W ⊂V is a linear operator which preserves inner products, that is, for any
+|w1∝and |w2∝in W,
+⟨w1|U †U|w2∝= ⟨w1|w2∝.
+(2.126)
+Prove that there exists a unitary operator U ′ : V ⊂V which extends U. That is,
+U ′|w∝= U|w∝for all |w∝in W, but U ′ is deﬁned on the entire space V . Usually
+we omit the prime symbol ′ and just write U to denote the extension.
+Next, suppose we perform a projective measurement on the two systems described by
+projectors Pm ≺IQ ◦|m∝⟨m|. Outcome m occurs with probability
+p(m) = ⟨ψ|⟨0|U †PmU|ψ∝|0∝
+(2.127)
+=
+⎬
+m′,m′′
+⟨ψ|M †
+m′⟨m′|(IQ ◦|m∝⟨m|)Mm′′|ψ∝|m′′∝
+(2.128)
+= ⟨ψ|M †
+mMm|ψ∝,
+(2.129)
+just as given in Postulate 3. The joint state of the system QM after measurement,
+conditional on result m occurring, is given by
+PmU|ψ∝|0∝
+6
+⟨ψ|U †PmU|ψ∝=
+Mm|ψ∝|m∝
+1
+⟨ψ|M †
+mMm|ψ∝
+.
+(2.130)
+It follows that the state of system M after the measurement is |m∝, and the state of
+system Q is
+Mm|ψ∝
+1
+⟨ψ|M †
+mMm|ψ∝
+,
+(2.131)
+just as prescribed by Postulate 3. Thus unitary dynamics, projective measurements, and
+the ability to introduce ancillary systems, together allow any measurement of the form
+described in Postulate 3 to be realized.
+Postulate 4 also enables us to deﬁne one of the most interesting and puzzling ideas
+associated with composite quantum systems – entanglement. Consider the two qubit state
+|ψ∝= |00∝+ |11∝
+↔
+2
+.
+(2.132)
+This state has the remarkable property that there are no single qubit states |a∝and |b∝
+such that |ψ∝= |a∝|b∝, a fact which you should now convince yourself of:
+
+--- Page 37 ---
+96
+Introduction to quantum mechanics
+Exercise 2.68:
+Prove that |ψ∝∼= |a∝|b∝for all single qubit states |a∝and |b∝.
+We say that a state of a composite system having this property (that it can’t be written
+as a product of states of its component systems) is an entangled state. For reasons which
+nobody fully understands, entangled states play a crucial role in quantum computation
+and quantum information, and arise repeatedly through the remainder of this book. We
+have already seen entanglement play a crucial role in quantum teleportation, as described
+in Section 1.3.7. In this chapter we give two examples of the strange effects enabled by
+entangled quantum states, superdense coding (Section 2.3), and the violation of Bell’s
+inequality (Section 2.6).
+2.2.9
+Quantum mechanics: a global view
+We have now explained all the fundamental postulates of quantum mechanics. Most of
+the rest of the book is taken up with deriving consequences of these postulates. Let’s
+quickly review the postulates and try to place them in some kind of global perspective.
+Postulate 1 sets the arena for quantum mechanics, by specifying how the state of an
+isolated quantum system is to be described. Postulate 2 tells us that the dynamics of
+closed quantum systems are described by the Schr¨odinger equation, and thus by unitary
+evolution. Postulate 3 tells us how to extract information from our quantum systems by
+giving a prescription for the description of measurement. Postulate 4 tells us how the
+state spaces of different quantum systems may be combined to give a description of the
+composite system.
+What’s odd about quantum mechanics, at least by our classical lights, is that we can’t
+directly observe the state vector. It’s a little bit like a game of chess where you can
+never ﬁnd out exactly where each piece is, but only know the rank of the board they
+are on. Classical physics – and our intuition – tells us that the fundamental properties
+of an object, like energy, position, and velocity, are directly accessible to observation. In
+quantum mechanics these quantities no longer appear as fundamental, being replaced by
+the state vector, which can’t be directly observed. It is as though there is a hidden world
+in quantum mechanics, which we can only indirectly and imperfectly access. Moreover,
+merely observing a classical system does not necessarily change the state of the system.
+Imagine how difﬁcult it would be to play tennis if each time you looked at the ball its
+position changed! But according to Postulate 3, observation in quantum mechanics is an
+invasive procedure that typically changes the state of the system.
+What conclusions should we draw from these strange features of quantum mechanics?
+Might it be possible to reformulate quantum mechanics in a mathematically equivalent
+way so that it had a structure more like classical physics? In Section 2.6 we’ll prove
+Bell’s inequality, a surprising result that shows any attempt at such a reformulation is
+doomed to failure. We’re stuck with the counter-intuitive nature of quantum mechanics.
+Of course, the proper reaction to this is glee, not sorrow! It gives us an opportunity
+to develop tools of thought that make quantum mechanics intuitive. Moreover, we can
+exploit the hidden nature of the state vector to do information processing tasks beyond
+what is possible in the classical world. Without this counter-intuitive behavior, quantum
+computation and quantum information would be a lot less interesting.
+We can also turn this discussion about, and ask ourselves: ‘If quantum mechanics is
+so different from classical physics, then how come the everyday world looks so classical?’
+Why do we see no evidence of a hidden state vector in our everyday lives? It turns out
+
+--- Page 38 ---
+Application: superdense coding
+97
+that the classical world we see can be derived from quantum mechanics as an approximate
+description of the world that will be valid on the sort of time, length and mass scales
+we commonly encounter in our everyday lives. Explaining the details of how quantum
+mechanics gives rise to classical physics is beyond the scope of this book, but the interested
+reader should check out the discussion of this topic in ‘History and further reading’at
+the end of Chapter 8.
+2.3
+Application: superdense coding
+Superdense coding is a simple yet surprising application of elementary quantum mechan-
+ics. It combines in a concrete, non-trivial way all the basic ideas of elementary quantum
+mechanics, as covered in the previous sections, and is therefore an ideal example of the
+information processing tasks that can be accomplished using quantum mechanics.
+Superdense coding involves two parties, conventionally known as ‘Alice’ and ‘Bob’,
+who are a long way away from one another. Their goal is to transmit some classical
+information from Alice to Bob. Suppose Alice is in possession of two classical bits of
+information which she wishes to send Bob, but is only allowed to send a single qubit to
+Bob. Can she achieve her goal?
+Superdense coding tells us that the answer to this question is yes. Suppose Alice and
+Bob initially share a pair of qubits in the entangled state
+|ψ∝= |00∝+ |11∝
+↔
+2
+.
+(2.133)
+Alice is initially in possession of the ﬁrst qubit, while Bob has possession of the second
+qubit, as illustrated in Figure 2.3. Note that |ψ∝is a ﬁxed state; there is no need for Alice
+to have sent Bob any qubits in order to prepare this state. Instead, some third party may
+prepare the entangled state ahead of time, sending one of the qubits to Alice, and the
+other to Bob.
+!"#
+!
+""
+## !
+"
+$%&'(
+) *+#&,
+) *+#&,
+--. !  -). "
+)-.#  )).$%
+Figure 2.3. The initial setup for superdense coding, with Alice and Bob each in possession of one half of an
+entangled pair of qubits. Alice can use superdense coding to transmit two classical bits of information to Bob, using
+only a single qubit of communication and this preshared entanglement.
+By sending the single qubit in her possession to Bob, it turns out that Alice can
+communicate two bits of classical information to Bob. Here is the procedure she uses. If
+she wishes to send the bit string ‘00’ to Bob then she does nothing at all to her qubit. If
+she wishes to send ‘01’ then she applies the phase ﬂip Z to her qubit. If she wishes to
+send ‘10’ then she applies the quantum
+gate, X, to her qubit. If she wishes to send
+‘11’ then she applies the iY gate to her qubit. The four resulting states are easily seen
+
+--- Page 39 ---
+98
+Introduction to quantum mechanics
+to be:
+00 : |ψ∝⊂|00∝+ |11∝
+↔
+2
+(2.134)
+01 : |ψ∝⊂|00∝∇|11∝
+↔
+2
+(2.135)
+10 : |ψ∝⊂|10∝+ |01∝
+↔
+2
+(2.136)
+11 : |ψ∝⊂|01∝∇|10∝
+↔
+2
+.
+(2.137)
+As we noted in Section 1.3.6, these four states are known as the Bell basis, Bell states,
+or EPR pairs, in honor of several of the pioneers who ﬁrst appreciated the novelty of
+entanglement. Notice that the Bell states form an orthonormal basis, and can therefore
+be distinguished by an appropriate quantum measurement. If Alice sends her qubit to
+Bob, giving Bob possession of both qubits, then by doing a measurement in the Bell basis
+Bob can determine which of the four possible bit strings Alice sent.
+Summarizing, Alice, interacting with only a single qubit, is able to transmit two bits
+of information to Bob. Of course, two qubits are involved in the protocol, but Alice
+never need interact with the second qubit. Classically, the task Alice accomplishes would
+have been impossible had she only transmitted a single classical bit, as we will show
+in Chapter 12. Furthermore, this remarkable superdense coding protocol has received
+partial veriﬁcation in the laboratory. (See ‘History and further reading’ for references to
+the experimental veriﬁcation.) In later chapters we will see many other examples, some
+of them much more spectacular than superdense coding, of quantum mechanics being
+harnessed to perform information processing tasks. However, a key point can already be
+seen in this beautiful example: information is physical, and surprising physical theories
+such as quantum mechanics may predict surprising information processing abilities.
+Exercise 2.69:
+Verify that the Bell basis forms an orthonormal basis for the two qubit
+state space.
+Exercise 2.70:
+Suppose E is any positive operator acting on Alice’s qubit. Show that
+⟨ψ|E ◦I|ψ∝takes the same value when |ψ∝is any of the four Bell states.
+Suppose some malevolent third party (‘Eve’) intercepts Alice’s qubit on the way
+to Bob in the superdense coding protocol. Can Eve infer anything about which
+of the four possible bit strings 00, 01, 10, 11 Alice is trying to send? If so, how, or
+if not, why not?
+2.4
+The density operator
+We have formulated quantum mechanics using the language of state vectors. An alternate
+formulation is possible using a tool known as the density operator or density matrix.
+This alternate formulation is mathematically equivalent to the state vector approach,
+but it provides a much more convenient language for thinking about some commonly
+encountered scenarios in quantum mechanics. The next three sections describe the density
+operator formulation of quantum mechanics. Section 2.4.1 introduces the density operator
+using the concept of an ensemble of quantum states. Section 2.4.2 develops some general
+
+--- Page 40 ---
+The density operator
+99
+properties of the density operator. Finally, Section 2.4.3 describes an application where
+the density operator really shines – as a tool for the description of individual subsystems
+of a composite quantum system.
+2.4.1
+Ensembles of quantum states
+The density operator language provides a convenient means for describing quantum
+systems whose state is not completely known. More precisely, suppose a quantum system
+is in one of a number of states |ψi∝, where i is an index, with respective probabilities pi.
+We shall call {pi, |ψi∝} an ensemble of pure states. The density operator for the system
+is deﬁned by the equation
+, ≺
+⎬
+i
+pi|ψi∝⟨ψi|.
+(2.138)
+The density operator is often known as the density matrix; we will use the two terms
+interchangeably. It turns out that all the postulates of quantum mechanics can be re-
+formulated in terms of the density operator language. The purpose of this section and
+the next is to explain how to perform this reformulation, and explain when it is useful.
+Whether one uses the density operator language or the state vector language is a matter of
+taste, since both give the same results; however it is sometimes much easier to approach
+problems from one point of view rather than the other.
+Suppose, for example, that the evolution of a closed quantum system is described by
+the unitary operator U. If the system was initially in the state |ψi∝with probability pi then
+after the evolution has occurred the system will be in the state U|ψi∝with probability
+pi. Thus, the evolution of the density operator is described by the equation
+, =
+⎬
+i
+pi|ψi∝⟨ψi|
+U
+∇⊂
+⎬
+i
+piU|ψi∝⟨ψi|U † = U,U †.
+(2.139)
+Measurements are also easily described in the density operator language. Suppose we
+perform a measurement described by measurement operators Mm. If the initial state was
+|ψi∝, then the probability of getting result m is
+p(m|i) = ⟨ψi|M †
+mMm|ψi∝= tr(M †
+mMm|ψi∝⟨ψi|),
+(2.140)
+where we have used Equation (2.61) to obtain the last equality. By the law of total
+probability (see Appendix 1 for an explanation of this and other elementary notions of
+probability theory) the probability of obtaining result m is
+p(m) =
+⎬
+i
+p(m|i)pi
+(2.141)
+=
+⎬
+i
+pitr(M †
+mMm|ψi∝⟨ψi|)
+(2.142)
+= tr(M †
+mMm,).
+(2.143)
+What is the density operator of the system after obtaining the measurement result m? If
+the initial state was |ψi∝then the state after obtaining the result m is
+|ψm
+i ∝=
+Mm|ψi∝
+1
+⟨ψi|M †
+mMm|ψi∝
+.
+(2.144)
+
+--- Page 41 ---
+100
+Introduction to quantum mechanics
+Thus, after a measurement which yields the result m we have an ensemble of states |ψm
+i ∝
+with respective probabilities p(i|m). The corresponding density operator ,m is therefore
+,m =
+⎬
+i
+p(i|m)|ψm
+i ∝⟨ψm
+i | =
+⎬
+i
+p(i|m)Mm|ψi∝⟨ψi|M †
+m
+⟨ψi|M †
+mMm|ψi∝
+.
+(2.145)
+But by elementary probability theory, p(i|m) = p(m, i)/p(m) = p(m|i)pi/p(m). Substi-
+tuting from (2.143) and (2.140) we obtain
+,m =
+⎬
+i
+pi
+Mm|ψi∝⟨ψi|M †
+m
+tr(M †
+mMm,)
+(2.146)
+=
+Mm,M †
+m
+tr(M †
+mMm,)
+.
+(2.147)
+What we have shown is that the basic postulates of quantum mechanics related to
+unitary evolution and measurement can be rephrased in the language of density operators.
+In the next section we complete this rephrasing by giving an intrinsic characterization of
+the density operator that does not rely on the idea of a state vector.
+Before doing so, however, it is useful to introduce some more language, and one more
+fact about the density operator. First, the language. A quantum system whose state |ψ∝
+is known exactly is said to be in a pure state. In this case the density operator is simply
+, = |ψ∝⟨ψ|. Otherwise, , is in a mixed state; it is said to be a mixture of the different
+pure states in the ensemble for ,. In the exercises you will be asked to demonstrate a
+simple criterion for determining whether a state is pure or mixed: a pure state satisﬁes
+tr(,2) = 1, while a mixed state satisﬁes tr(,2) < 1. A few words of warning about the
+nomenclature: sometimes people use the term ‘mixed state’ as a catch-all to include both
+pure and mixed quantum states. The origin for this usage seems to be that it implies that
+the writer is not necessarily assuming that a state is pure. Second, the term ‘pure state’
+is often used in reference to a state vector |ψ∝, to distinguish it from a density operator
+,.
+Finally, imagine a quantum system is prepared in the state ,i with probability pi. It is
+not difﬁcult to convince yourself that the system may be described by the density matrix
+#
+i pi,i. A proof of this is to suppose that ,i arises from some ensemble {pij, |ψij∝}
+(note that i is ﬁxed) of pure states, so the probability for being in the state |ψij∝is pipij.
+The density matrix for the system is thus
+, =
+⎬
+ij
+pipij|ψij∝⟨ψij|
+(2.148)
+=
+⎬
+i
+pi,i,
+(2.149)
+where we have used the deﬁnition ,i = #
+j pij|ψij∝⟨ψij|. We say that , is a mixture
+of the states ,i with probabilities pi. This concept of a mixture comes up repeatedly in
+the analysis of problems like quantum noise, where the effect of the noise is to introduce
+ignorance into our knowledge of the quantum state. A simple example is provided by the
+measurement scenario described above. Imagine that, for some reason, our record of the
+result m of the measurement was lost. We would have a quantum system in the state
+,m with probability p(m), but would no longer know the actual value of m. The state of
+
+--- Page 42 ---
+The density operator
+101
+such a quantum system would therefore be described by the density operator
+, =
+⎬
+m
+p(m),m
+(2.150)
+=
+⎬
+m
+tr(M †
+mMm,) Mm,M †
+m
+tr(M †
+mMm,)
+(2.151)
+=
+⎬
+m
+Mm,M †
+m,
+(2.152)
+a nice compact formula which may be used as the starting point for analysis of further
+operations on the system.
+2.4.2
+General properties of the density operator
+The density operator was introduced as a means of describing ensembles of quantum
+states. In this section we move away from this description to develop an intrinsic char-
+acterization of density operators that does not rely on an ensemble interpretation. This
+allows us to complete the program of giving a description of quantum mechanics that
+does not take as its foundation the state vector. We also take the opportunity to develop
+numerous other elementary properties of the density operator.
+The class of operators that are density operators are characterized by the following
+useful theorem:
+Theorem 2.5: (Characterization of density operators) An operator , is the density
+operator associated to some ensemble {pi, |ψi∝} if and only if it satisﬁes the
+conditions:
+(1) (Trace condition) , has trace equal to one.
+(2) (Positivity condition) , is a positive operator.
+Proof
+Suppose , = #
+i pi|ψi∝⟨ψi| is a density operator. Then
+tr(,) =
+⎬
+i
+pitr(|ψi∝⟨ψi|) =
+⎬
+i
+pi = 1,
+(2.153)
+so the trace condition tr(,) = 1 is satisﬁed. Suppose |ϕ∝is an arbitrary vector in state
+space. Then
+⟨ϕ|,|ϕ∝=
+⎬
+i
+pi⟨ϕ|ψi∝⟨ψi|ϕ∝
+(2.154)
+=
+⎬
+i
+pi|⟨ϕ|ψi∝|2
+(2.155)
+∩0,
+(2.156)
+so the positivity condition is satisﬁed.
+Conversely, suppose , is any operator satisfying the trace and positivity conditions.
+Since , is positive, it must have a spectral decomposition
+, =
+⎬
+j
+λj|j∝⟨j|,
+(2.157)
+where the vectors |j∝are orthogonal, and λj are real, non-negative eigenvalues of ,.
+
+--- Page 43 ---
+102
+Introduction to quantum mechanics
+From the trace condition we see that #
+j λj = 1. Therefore, a system in state |j∝with
+probability λj will have density operator ,. That is, the ensemble {λj, |j∝} is an ensemble
+of states giving rise to the density operator ,.
+This theorem provides a characterization of density operators that is intrinsic to the
+operator itself: we can deﬁne a density operator to be a positive operator , which has
+trace equal to one. Making this deﬁnition allows us to reformulate the postulates of
+quantum mechanics in the density operator picture. For ease of reference we state all the
+reformulated postulates here:
+Postulate 1: Associated to any isolated physical system is a complex vector space
+with inner product (that is, a Hilbert space) known as the state space of the
+system. The system is completely described by its density operator, which is a
+positive operator , with trace one, acting on the state space of the system. If a
+quantum system is in the state ,i with probability pi, then the density operator for
+the system is #
+i pi,i.
+Postulate 2: The evolution of a closed quantum system is described by a unitary
+transformation. That is, the state , of the system at time t1 is related to the state
+,′ of the system at time t2 by a unitary operator U which depends only on the
+times t1 and t2,
+,′ = U,U †.
+(2.158)
+Postulate 3: Quantum measurements are described by a collection {Mm} of
+measurement operators. These are operators acting on the state space of the
+system being measured. The index m refers to the measurement outcomes that
+may occur in the experiment. If the state of the quantum system is , immediately
+before the measurement then the probability that result m occurs is given by
+p(m) = tr(M †
+mMm,),
+(2.159)
+and the state of the system after the measurement is
+Mm,M †
+m
+tr(M †
+mMm,)
+.
+(2.160)
+The measurement operators satisfy the completeness equation,
+⎬
+m
+M †
+mMm = I.
+(2.161)
+Postulate 4: The state space of a composite physical system is the tensor product
+of the state spaces of the component physical systems. Moreover, if we have
+systems numbered 1 through n, and system number i is prepared in the state ,i,
+then the joint state of the total system is ,1 ◦,2 ◦. . . ,n.
+These reformulations of the fundamental postulates of quantum mechanics in terms of
+the density operator are, of course, mathematically equivalent to the description in terms
+of the state vector. Nevertheless, as a way of thinking about quantum mechanics, the
+density operator approach really shines for two applications: the description of quantum
+systems whose state is not known, and the description of subsystems of a composite
+
+--- Page 44 ---
+The density operator
+103
+quantum system, as will be described in the next section. For the remainder of this
+section we ﬂesh out the properties of the density matrix in more detail.
+Exercise 2.71: (Criterion to decide if a state is mixed or pure)
+Let , be a
+density operator. Show that tr(,2) ≤1, with equality if and only if , is a pure
+state.
+It is a tempting (and surprisingly common) fallacy to suppose that the eigenvalues
+and eigenvectors of a density matrix have some special signiﬁcance with regard to the
+ensemble of quantum states represented by that density matrix. For example, one might
+suppose that a quantum system with density matrix
+, = 3
+4|0∝⟨0| + 1
+4|1∝⟨1| .
+(2.162)
+must be in the state |0∝with probability 3/4 and in the state |1∝with probability 1/4.
+However, this is not necessarily the case. Suppose we deﬁne
+|a∝≺
+C
+3
+4|0∝+
+C
+1
+4|1∝
+(2.163)
+|b∝≺
+C
+3
+4|0∝∇
+C
+1
+4|1∝,
+(2.164)
+and the quantum system is prepared in the state |a∝with probability 1/2 and in the state
+|b∝with probability 1/2. Then it is easily checked that the corresponding density matrix
+is
+, = 1
+2|a∝⟨a| + 1
+2|b∝⟨b| = 3
+4|0∝⟨0| + 1
+4|1∝⟨1|.
+(2.165)
+That is, these two different ensembles of quantum states give rise to the same density
+matrix. In general, the eigenvectors and eigenvalues of a density matrix just indicate one
+of many possible ensembles that may give rise to a speciﬁc density matrix, and there is
+no reason to suppose it is an especially privileged ensemble.
+A natural question to ask in the light of this discussion is what class of ensembles does
+give rise to a particular density matrix? The solution to this problem, which we now give,
+has surprisingly many applications in quantum computation and quantum information,
+notably in the understanding of quantum noise and quantum error-correction (Chapters 8
+and 10). For the solution it is convenient to make use of vectors | ˜ψi∝which may not be
+normalized to unit length. We say the set | ˜ψi∝generates the operator , ≺#
+i | ˜ψi∝⟨˜ψi|,
+and thus the connection to the usual ensemble picture of density operators is expressed
+by the equation | ˜ψi∝= ↔pi|ψi∝. When do two sets of vectors, | ˜ψi∝and | ˜ϕj∝generate the
+same operator ,? The solution to this problem will enable us to answer the question of
+what ensembles give rise to a given density matrix.
+Theorem 2.6: (Unitary freedom in the ensemble for density matrices) The sets
+| ˜ψi∝and | ˜ϕj∝generate the same density matrix if and only if
+| ˜ψi∝=
+⎬
+j
+uij| ˜ϕj∝,
+(2.166)
+where uij is a unitary matrix of complex numbers, with indices i and j, and we
+
+--- Page 45 ---
+104
+Introduction to quantum mechanics
+‘pad’ whichever set of vectors | ˜ψi∝or | ˜ϕj∝is smaller with additional vectors 0 so
+that the two sets have the same number of elements.
+As a consequence of the theorem, note that , = #
+i pi|ψi∝⟨ψi| = #
+j qj|ϕj∝⟨ϕj| for
+normalized states |ψi∝, |ϕj∝and probability distributions pi and qj if and only if
+↔pi|ψi∝=
+⎬
+j
+uij↔qj|ϕj∝,
+(2.167)
+for some unitary matrix uij, and we may pad the smaller ensemble with entries having
+probability zero in order to make the two ensembles the same size. Thus, Theorem 2.6
+characterizes the freedom in ensembles {pi, |ψi∝} giving rise to a given density matrix ,.
+Indeed, it is easily checked that our earlier example of a density matrix with two different
+decompositions, (2.162), arises as a special case of this general result. Let’s turn now to
+the proof of the theorem.
+Proof
+Suppose | ˜ψi∝= #
+j uij| ˜ϕj∝for some unitary uij. Then
+⎬
+i
+| ˜ψi∝⟨˜ψi| =
+⎬
+ijk
+uiju∗
+ik| ˜ϕj∝⟨˜ϕk|
+(2.168)
+=
+⎬
+jk
+⎫⎬
+i
+u†
+kiuij
+⎭
+| ˜ϕj∝⟨˜ϕk|
+(2.169)
+=
+⎬
+jk
+δkj| ˜ϕj∝⟨˜ϕk|
+(2.170)
+=
+⎬
+j
+| ˜ϕj∝⟨˜ϕj|,
+(2.171)
+which shows that | ˜ψi∝and | ˜ϕj∝generate the same operator.
+Conversely, suppose
+A =
+⎬
+i
+| ˜ψi∝⟨˜ψi| =
+⎬
+j
+| ˜ϕj∝⟨˜ϕj| .
+(2.172)
+Let A = #
+k λk|k∝⟨k| be a decomposition for A such that the states |k∝are orthonormal,
+and the λk are strictly positive. Our strategy is to relate the states | ˜ψi∝to the states
+|˜k∝≺↔λk|k∝, and similarly relate the states | ˜ϕj∝to the states |˜k∝. Combining the two
+relations will give the result. Let |ψ∝be any vector orthonormal to the space spanned by
+the |˜k∝, so ⟨ψ|˜k∝⟨˜k|ψ∝= 0 for all k, and thus we see that
+0 = ⟨ψ|A|ψ∝=
+⎬
+i
+⟨ψ| ˜ψi∝⟨˜ψi|ψ∝=
+⎬
+i
+|⟨ψ| ˜ψi∝|2.
+(2.173)
+Thus ⟨ψ| ˜ψi∝= 0 for all i and all |ψ∝orthonormal to the space spanned by the |˜k∝.
+It follows that each | ˜ψi∝can be expressed as a linear combination of the |˜k∝, | ˜ψi∝=
+#
+k cik|˜k∝. Since A = #
+k |˜k∝⟨˜k| = #
+i | ˜ψi∝⟨˜ψi| we see that
+⎬
+k
+|˜k∝⟨˜k| =
+⎬
+kl
+⎫⎬
+i
+cikc∗
+il
+⎭
+|˜k∝⟨˜l|.
+(2.174)
+The operators |˜k∝⟨˜l| are easily seen to be linearly independent, and thus it must be that
+
+--- Page 46 ---
+The density operator
+105
+!
+i cikc∗
+il = δkl. This ensures that we may append extra columns to c to obtain a unitary
+matrix v such that | ˜ψi⟩= !
+k vik|˜k⟩, where we have appended zero vectors to the list
+of |˜k⟩. Similarly, we can ﬁnd a unitary matrix w such that | ˜ϕj⟩= !
+k wjk|˜k⟩. Thus
+| ˜ψi⟩= !
+j uij| ˜ϕj⟩, where u = vw† is unitary.
+Exercise 2.72: (Bloch sphere for mixed states)
+The Bloch sphere picture for pure
+states of a single qubit was introduced in Section 1.2. This description has an
+important generalization to mixed states as follows.
+(1) Show that an arbitrary density matrix for a mixed state qubit may be written
+as
+ρ = I + ⃗r · ⃗σ
+2
+,
+(2.175)
+where ⃗r is a real three-dimensional vector such that ∥⃗r∥≤1. This vector is
+known as the Bloch vector for the state ρ.
+(2) What is the Bloch vector representation for the state ρ = I/2?
+(3) Show that a state ρ is pure if and only if ∥⃗r∥= 1.
+(4) Show that for pure states the description of the Bloch vector we have given
+coincides with that in Section 1.2.
+Exercise 2.73:
+Let ρ be a density operator. A minimal ensemble for ρ is an ensemble
+{pi, |ψi⟩} containing a number of elements equal to the rank of ρ. Let |ψ⟩be
+any state in the support of ρ. (The support of a Hermitian operator A is the
+vector space spanned by the eigenvectors of A with non-zero eigenvalues.) Show
+that there is a minimal ensemble for ρ that contains |ψ⟩, and moreover that in
+any such ensemble |ψ⟩must appear with probability
+pi =
+1
+⟨ψi|ρ−1|ψi⟩,
+(2.176)
+where ρ−1 is deﬁned to be the inverse of ρ, when ρ is considered as an operator
+acting only on the support of ρ. (This deﬁnition removes the problem that ρ may
+not have an inverse.)
+2.4.3
+The reduced density operator
+Perhaps the deepest application of the density operator is as a descriptive tool for sub-
+systems of a composite quantum system. Such a description is provided by the reduced
+density operator, which is the subject of this section. The reduced density operator is so
+useful as to be virtually indispensable in the analysis of composite quantum systems.
+Suppose we have physical systems A and B, whose state is described by a density
+operator ρAB. The reduced density operator for system A is deﬁned by
+ρA ≡trB(ρAB),
+(2.177)
+where trB is a map of operators known as the partial trace over system B. The partial
+trace is deﬁned by
+trB
+"|a1⟩⟨a2| ⊗|b1⟩⟨b2|
+# ≡|a1⟩⟨a2| tr(|b1⟩⟨b2|),
+(2.178)
+where |a1⟩and |a2⟩are any two vectors in the state space of A, and |b1⟩and |b2⟩are any
+two vectors in the state space of B. The trace operation appearing on the right hand side
+
+--- Page 47 ---
+106
+Introduction to quantum mechanics
+is the usual trace operation for system B, so tr(|b1⟩⟨b2|) = ⟨b2|b1⟩. We have deﬁned the
+partial trace operation only on a special subclass of operators on AB; the speciﬁcation is
+completed by requiring in addition to Equation (2.178) that the partial trace be linear in
+its input.
+It is not obvious that the reduced density operator for system A is in any sense a
+description for the state of system A. The physical justiﬁcation for making this identiﬁ-
+cation is that the reduced density operator provides the correct measurement statistics for
+measurements made on system A. This is explained in more detail in Box 2.6 on page 107.
+The following simple example calculations may also help understand the reduced density
+operator. First, suppose a quantum system is in the product state ρAB = ρ ⊗σ, where
+ρ is a density operator for system A, and σ is a density operator for system B. Then
+ρA = trB(ρ ⊗σ) = ρ tr(σ) = ρ,
+(2.184)
+which is the result we intuitively expect. Similarly, ρB = σ for this state. A less trivial
+example is the Bell state (|00⟩+ |11⟩)/
+√
+2. This has density operator
+ρ =
+$|00⟩+ |11⟩
+√
+2
+% $⟨00| + ⟨11|
+√
+2
+%
+(2.185)
+= |00⟩⟨00| + |11⟩⟨00| + |00⟩⟨11| + |11⟩⟨11|
+2
+.
+(2.186)
+Tracing out the second qubit, we ﬁnd the reduced density operator of the ﬁrst qubit,
+ρ1 = tr2(ρ)
+(2.187)
+= tr2(|00⟩⟨00|) + tr2(|11⟩⟨00|) + tr2(|00⟩⟨11|) + tr2(|11⟩⟨11|)
+2
+(2.188)
+= |0⟩⟨0|⟨0|0⟩+ |1⟩⟨0|⟨0|1⟩+ |0⟩⟨1|⟨1|0⟩+ |1⟩⟨1|⟨1|1⟩
+2
+(2.189)
+= |0⟩⟨0| + |1⟩⟨1|
+2
+(2.190)
+= I
+2 .
+(2.191)
+Notice that this state is a mixed state, since tr((I/2)2) = 1/2 < 1. This is quite a
+remarkable result. The state of the joint system of two qubits is a pure state, that is,
+it is known exactly; however, the ﬁrst qubit is in a mixed state, that is, a state about
+which we apparently do not have maximal knowledge. This strange property, that the
+joint state of a system can be completely known, yet a subsystem be in mixed states, is
+another hallmark of quantum entanglement.
+Exercise 2.74:
+Suppose a composite of systems A and B is in the state |a⟩|b⟩, where
+|a⟩is a pure state of system A, and |b⟩is a pure state of system B. Show that
+the reduced density operator of system A alone is a pure state.
+Exercise 2.75:
+For each of the four Bell states, ﬁnd the reduced density operator for
+each qubit.
+Quantum teleportation and the reduced density operator
+A useful application of the reduced density operator is to the analysis of quantum telepor-
+tation. Recall from Section 1.3.7 that quantum teleportation is a procedure for sending
+
+--- Page 48 ---
+The density operator
+107
+Box 2.6: Why the partial trace?
+Why is the partial trace used to describe part of a larger quantum system? The
+reason for doing this is because the partial trace operation is the unique operation
+which gives rise to the correct description of observable quantities for subsystems
+of a composite system, in the following sense.
+Suppose M is any observable on system A, and we have some measuring device
+which is capable of realizing measurements of M. Let ˜M denote the corresponding
+observable for the same measurement, performed on the composite system AB.
+Our immediate goal is to argue that ˜M is necessarily equal to M ◦IB. Note that
+if the system AB is prepared in the state |m∝|ψ∝, where |m∝is an eigenstate of M
+with eigenvalue m, and |ψ∝is any state of B, then the measuring device must yield
+the result m for the measurement, with probability one. Thus, if Pm is the projector
+onto the m eigenspace of the observable M, then the corresponding projector for
+˜M is Pm ◦IB. We therefore have
+˜M =
+⎬
+m
+mPm ◦IB = M ◦IB.
+(2.179)
+The next step is to show that the partial trace procedure gives the correct mea-
+surement statistics for observations on part of a system. Suppose we perform a
+measurement on system A described by the observable M. Physical consistency
+requires that any prescription for associating a ‘state’, ,A, to system A, must have
+the property that measurement averages be the same whether computed via ,A or
+,AB,
+tr(M,A) = tr( ˜M,AB) = tr((M ◦IB),AB).
+(2.180)
+This equation is certainly satisﬁed if we choose ,A ≺trB(,AB). In fact, the partial
+trace turns out to be the unique function having this property. To see this unique-
+ness property, let f(·) be any map of density operators on AB to density operators
+on A such that
+tr(Mf(,AB)) = tr((M ◦IB),AB),
+(2.181)
+for all observables M. Let Mi be an orthonormal basis of operators for the space of
+Hermitian operators with respect to the Hilbert–Schmidt inner product (X, Y ) ≺
+tr(XY ) (compare Exercise 2.39 on page 76). Then expanding f(,AB) in this basis
+gives
+f(,AB) =
+⎬
+i
+Mitr(Mif(,AB))
+(2.182)
+=
+⎬
+i
+Mitr((Mi ◦IB),AB).
+(2.183)
+It follows that f is uniquely determined by Equation (2.180). Moreover, the partial
+trace satisﬁes (2.180), so it is the unique function having this property.
+quantum information from Alice to Bob, given that Alice and Bob share an EPR pair,
+and have a classical communications channel.
+
+--- Page 49 ---
+108
+Introduction to quantum mechanics
+At ﬁrst sight it appears as though teleportation can be used to do faster than light
+communication, a big no-no according to the theory of relativity. We surmised in Sec-
+tion 1.3.7 that what prevents faster than light communication is the need for Alice to
+communicate her measurement result to Bob. The reduced density operator allows us to
+make this rigorous.
+Recall that immediately before Alice makes her measurement the quantum state of the
+three qubits is (Equation (1.32)):
+|ψ2∝= 1
+2
+?
+|00∝
+'α|0∝+ β|1∝
+( + |01∝
+'α|1∝+ β|0∝
+(
++|10∝
+'α|0∝∇β|1∝
+( + |11∝
+'α|1∝∇β|0∝
+(@
+.
+(2.192)
+Measuring in Alice’s computational basis, the state of the system after the measurement
+is:
+|00∝
+?
+α|0∝+ β|1∝
+@
+with probability 1
+4
+(2.193)
+|01∝
+?
+α|1∝+ β|0∝
+@
+with probability 1
+4
+(2.194)
+|10∝
+?
+α|0∝∇β|1∝
+@
+with probability 1
+4
+(2.195)
+|11∝
+?
+α|1∝∇β|0∝
+@
+with probability 1
+4.
+(2.196)
+The density operator of the system is thus
+, = 1
+4
+?
+|00∝⟨00|(α|0∝+ β|1∝)(α∗⟨0| + β∗⟨1|) + |01∝⟨01|(α|1∝+ β|0∝)(α∗⟨1| + β∗⟨0|)
++|10∝⟨10|(α|0∝∇β|1∝)(α∗⟨0| ∇β∗⟨1|) + |11∝⟨11|(α|1∝∇β|0∝)(α∗⟨1| ∇β∗⟨0|)
+@
+.
+(2.197)
+Tracing out Alice’s system, we see that the reduced density operator of Bob’s system is
+,B = 1
+4
+?
+(α|0∝+ β|1∝)(α∗⟨0| + β∗⟨1|) + (α|1∝+ β|0∝)(α∗⟨1| + β∗⟨0|)
++(α|0∝∇β|1∝)(α∗⟨0| ∇β∗⟨1|) + (α|1∝∇β|0∝)(α∗⟨1| ∇β∗⟨0|)
+@
+(2.198)
+= 2(|α|2 + |β|2)|0∝⟨0| + 2(|α|2 + |β|2)|1∝⟨1|
+4
+(2.199)
+= |0∝⟨0| + |1∝⟨1|
+2
+(2.200)
+= I
+2,
+(2.201)
+where we have used the completeness relation in the last line. Thus, the state of Bob’s
+system after Alice has performed the measurement but before Bob has learned the mea-
+surement result is I/2. This state has no dependence upon the state |ψ∝being teleported,
+and thus any measurements performed by Bob will contain no information about |ψ∝,
+thus preventing Alice from using teleportation to transmit information to Bob faster than
+light.
+
+--- Page 50 ---
+The Schmidt decomposition and puriﬁcations
+109
+2.5
+The Schmidt decomposition and puriﬁcations
+Density operators and the partial trace are just the beginning of a wide array of tools
+useful for the study of composite quantum systems, which are at the heart of quan-
+tum computation and quantum information. Two additional tools of great value are the
+Schmidt decomposition and puriﬁcations. In this section we present both these tools,
+and try to give the ﬂavor of their power.
+Theorem 2.7: (Schmidt decomposition) Suppose |ψ∝is a pure state of a composite
+system, AB. Then there exist orthonormal states |iA∝for system A, and
+orthonormal states |iB∝of system B such that
+|ψ∝=
+⎬
+i
+λi|iA∝|iB∝,
+(2.202)
+where λi are non-negative real numbers satisfying #
+i λ2
+i = 1 known as Schmidt
+co-efﬁcients.
+This result is very useful. As a taste of its power, consider the following consequence:
+let |ψ∝be a pure state of a composite system, AB. Then by the Schmidt decomposition
+,A = #
+i λ2
+i|iA∝⟨iA| and ,B = #
+i λ2
+i|iB∝⟨iB|, so the eigenvalues of ,A and ,B are
+identical, namely λ2
+i for both density operators. Many important properties of quantum
+systems are completely determined by the eigenvalues of the reduced density operator of
+the system, so for a pure state of a composite system such properties will be the same for
+both systems. As an example, consider the state of two qubits, (|00∝+ |01∝+ |11∝)/
+↔
+3.
+This has no obvious symmetry property, yet if you calculate tr
+'(,A)2( and tr
+'(,B)2(
+you will discover that they have the same value, 7/9 in each case. This is but one small
+consequence of the Schmidt decomposition.
+Proof
+We give the proof for the case where systems A and B have state spaces of the same
+dimension, and leave the general case to Exercise 2.76. Let |j∝and |k∝be any ﬁxed
+orthonormal bases for systems A and B, respectively. Then |ψ∝can be written
+|ψ∝=
+⎬
+jk
+ajk|j∝|k∝,
+(2.203)
+for some matrix a of complex numbers ajk. By the singular value decomposition, a = udv,
+where d is a diagonal matrix with non-negative elements, and u and v are unitary matrices.
+Thus
+|ψ∝=
+⎬
+ijk
+ujidiivik|j∝|k∝.
+(2.204)
+Deﬁning |iA∝≺#
+j uji|j∝, |iB∝≺#
+k vik|k∝, and λi ≺dii, we see that this gives
+|ψ∝=
+⎬
+i
+λi|iA∝|iB∝.
+(2.205)
+It is easy to check that |iA∝forms an orthonormal set, from the unitarity of u and the
+orthonormality of |j∝, and similarly that the |iB∝form an orthonormal set.
+
+--- Page 51 ---
+110
+Introduction to quantum mechanics
+Exercise 2.76:
+Extend the proof of the Schmidt decomposition to the case where A
+and B may have state spaces of different dimensionality.
+Exercise 2.77:
+Suppose ABC is a three component quantum system. Show by
+example that there are quantum states |ψ∝of such systems which can not be
+written in the form
+|ψ∝=
+⎬
+i
+λi|iA∝|iB∝|iC∝,
+(2.206)
+where λi are real numbers, and |iA∝, |iB∝, |iC∝are orthonormal bases of the
+respective systems.
+The bases |iA∝and |iB∝are called the Schmidt bases for A and B, respectively, and
+the number of non-zero values λi is called the Schmidt number for the state |ψ∝. The
+Schmidt number is an important property of a composite quantum system, which in
+some sense quantiﬁes the ‘amount’ of entanglement between systems A and B. To get
+some idea of why this is the case, consider the following obvious but important property:
+the Schmidt number is preserved under unitary transformations on system A or system
+B alone. To see this, notice that if #
+i λi|iA∝|iB∝is the Schmidt decomposition for |ψ∝
+then #
+i λi(U|iA∝)|iB∝is the Schmidt decomposition for U|ψ∝, where U is a unitary
+operator acting on system A alone. Algebraic invariance properties of this type make the
+Schmidt number a very useful tool.
+Exercise 2.78:
+Prove that a state |ψ∝of a composite system AB is a product state if
+and only if it has Schmidt number 1. Prove that |ψ∝is a product state if and only
+if ,A (and thus ,B) are pure states.
+A second, related technique for quantum computation and quantum information is
+puriﬁcation. Suppose we are given a state ,A of a quantum system A. It is possible to
+introduce another system, which we denote R, and deﬁne a pure state |AR∝for the joint
+system AR such that ,A = trR(|AR∝⟨AR|). That is, the pure state |AR∝reduces to ,A
+when we look at system A alone. This is a purely mathematical procedure, known as
+puriﬁcation, which allows us to associate pure states with mixed states. For this reason
+we call system R a reference system: it is a ﬁctitious system, without a direct physical
+signiﬁcance.
+To prove that puriﬁcation can be done for any state, we explain how to construct
+a system R and puriﬁcation |AR∝for ,A. Suppose ,A has orthonormal decomposition
+,A = #
+i pi|iA∝⟨iA|. To purify ,A we introduce a system R which has the same state
+space as system A, with orthonormal basis states |iR∝, and deﬁne a pure state for the
+combined system
+|AR∝≺
+⎬
+i
+↔pi|iA∝|iR∝.
+(2.207)
+We now calculate the reduced density operator for system A corresponding to the state
+|AR∝:
+trR(|AR∝⟨AR|) =
+⎬
+ij
+↔pipj|iA∝⟨jA| tr(|iR∝⟨jR|)
+(2.208)
+=
+⎬
+ij
+↔pipj|iA∝⟨jA| δij
+(2.209)
+
+--- Page 52 ---
+EPR and the Bell inequality
+111
+=
+⎬
+i
+pi|iA∝⟨iA|
+(2.210)
+= ,A.
+(2.211)
+Thus |AR∝is a puriﬁcation of ,A.
+Notice the close relationship of the Schmidt decomposition to puriﬁcation: the proce-
+dure used to purify a mixed state of system A is to deﬁne a pure state whose Schmidt
+basis for system A is just the basis in which the mixed state is diagonal, with the Schmidt
+coefﬁcients being the square root of the eigenvalues of the density operator being puriﬁed.
+In this section we’ve explained two tools for studying composite quantum systems, the
+Schmidt decomposition and puriﬁcations. These tools will be indispensable to the study of
+quantum computation and quantum information, especially quantum information, which
+is the subject of Part III of this book.
+Exercise 2.79:
+Consider a composite system consisting of two qubits. Find the
+Schmidt decompositions of the states
+|00∝+ |11∝
+↔
+2
+;
+|00∝+ |01∝+ |10∝+ |11∝
+2
+; and |00∝+ |01∝+ |10∝
+↔
+3
+. (2.212)
+Exercise 2.80:
+Suppose |ψ∝and |ϕ∝are two pure states of a composite quantum
+system with components A and B, with identical Schmidt coefﬁcients. Show
+that there are unitary transformations U on system A and V on system B such
+that |ψ∝= (U ◦V )|ϕ∝.
+Exercise 2.81: (Freedom in puriﬁcations)
+Let |AR1∝and |AR2∝be two
+puriﬁcations of a state ,A to a composite system AR. Prove that there exists a
+unitary transformation UR acting on system R such that
+|AR1∝= (IA ◦UR)|AR2∝.
+Exercise 2.82:
+Suppose {pi, |ψi∝} is an ensemble of states generating a density matrix
+, = #
+i pi|ψi∝⟨ψi| for a quantum system A. Introduce a system R with
+orthonormal basis |i∝.
+(1) Show that #
+i
+↔pi|ψi∝|i∝is a puriﬁcation of ,.
+(2) Suppose we measure R in the basis |i∝, obtaining outcome i. With what
+probability do we obtain the result i, and what is the corresponding state of
+system A?
+(3) Let |AR∝be any puriﬁcation of , to the system AR. Show that there exists
+an orthonormal basis |i∝in which R can be measured such that the
+corresponding post-measurement state for system A is |ψi∝with probability
+pi.
+2.6
+EPR and the Bell inequality
+Anybody who is not shocked by quantum theory has not understood it.
+– Niels Bohr
+
+--- Page 53 ---
+112
+Introduction to quantum mechanics
+I recall that during one walk Einstein suddenly stopped, turned to me and asked
+whether I really believed that the moon exists only when I look at it. The rest
+of this walk was devoted to a discussion of what a physicist should mean by the
+term ‘to exist’.
+– Abraham Pais
+...quantum phenomena do not occur in a Hilbert space, they occur in a labora-
+tory.
+– Asher Peres
+...what is proved by impossibility proofs is lack of imagination.
+– John Bell
+This chapter has focused on introducing the tools and mathematics of quantum mechan-
+ics. As these techniques are applied in the following chapters of this book, an important
+recurring theme is the unusual, non-classical properties of quantum mechanics. But
+what exactly is the difference between quantum mechanics and the classical world? Un-
+derstanding this difference is vital in learning how to perform information processing
+tasks that are difﬁcult or impossible with classical physics. This section concludes the
+chapter with a discussion of the Bell inequality, a compelling example of an essential
+difference between quantum and classical physics.
+When we speak of an object such as a person or a book, we assume that the physical
+properties of that object have an existence independent of observation. That is, measure-
+ments merely act to reveal such physical properties. For example, a tennis ball has as one
+of its physical properties its position, which we typically measure using light scattered
+from the surface of the ball. As quantum mechanics was being developed in the 1920s
+and 1930s a strange point of view arose that differs markedly from the classical view. As
+described earlier in the chapter, according to quantum mechanics, an unobserved particle
+does not possess physical properties that exist independent of observation. Rather, such
+physical properties arise as a consequence of measurements performed upon the system.
+For example, according to quantum mechanics a qubit does not possess deﬁnite proper-
+ties of ‘spin in the z direction, σz’, and ‘spin in the x direction, σx’, each of which can
+be revealed by performing the appropriate measurement. Rather, quantum mechanics
+gives a set of rules which specify, given the state vector, the probabilities for the possible
+measurement outcomes when the observable σz is measured, or when the observable σx
+is measured.
+Many physicists rejected this new view of Nature. The most prominent objector was
+Albert Einstein. In the famous ‘EPR paper’, co-authored with Nathan Rosen and Boris
+Podolsky, Einstein proposed a thought experiment which, he believed, demonstrated that
+quantum mechanics is not a complete theory of Nature.
+The essence of the EPR argument is as follows. EPR were interested in what they
+termed ‘elements of reality’. Their belief was that any such element of reality must be
+represented in any complete physical theory. The goal of the argument was to show that
+quantum mechanics is not a complete physical theory, by identifying elements of reality
+that were not included in quantum mechanics. The way they attempted to do this was
+by introducing what they claimed was a sufﬁcient condition for a physical property to
+
+--- Page 54 ---
+EPR and the Bell inequality
+113
+be an element of reality, namely, that it be possible to predict with certainty the value
+that property will have, immediately before measurement.
+Box 2.7: Anti-correlations in the EPR experiment
+Suppose we prepare the two qubit state
+|ψ∝= |01∝∇|10∝
+↔
+2
+,
+(2.213)
+a state sometimes known as the spin singlet for historical reasons. It is not difﬁcult
+to show that this state is an entangled state of the two qubit system. Suppose we
+perform a measurement of spin along the ⃗v axis on both qubits, that is, we measure
+the observable ⃗v ·⃗σ (deﬁned in Equation (2.116) on page 90) on each qubit, getting
+a result of +1 or ∇1 for each qubit. It turns out that no matter what choice of ⃗v
+we make, the results of the two measurements are always opposite to one another.
+That is, if the measurement on the ﬁrst qubit yields +1, then the measurement on
+the second qubit will yield ∇1, and vice versa. It is as though the second qubit
+knows the result of the measurement on the ﬁrst, no matter how the ﬁrst qubit is
+measured. To see why this is true, suppose |a∝and |b∝are the eigenstates of ⃗v · ⃗σ.
+Then there exist complex numbers α, β, γ, δ such that
+|0∝= α|a∝+ β|b∝
+(2.214)
+|1∝= γ|a∝+ δ|b∝.
+(2.215)
+Substituting we obtain
+|01∝∇|10∝
+↔
+2
+= (αδ ∇βγ)|ab∝∇|ba∝
+↔
+2
+.
+(2.216)
+But αδ ∇βγ is the determinant of the unitary matrix
+! α
+β
+γ
+δ
+"
+, and thus is equal
+to a phase factor eiθ for some real θ. Thus
+|01∝∇|10∝
+↔
+2
+= |ab∝∇|ba∝
+↔
+2
+,
+(2.217)
+up to an unobservable global phase factor. As a result, if a measurement of ⃗v · ⃗σ
+is performed on both qubits, then we can see that a result of +1 (∇1) on the ﬁrst
+qubit implies a result of ∇1 (+1) on the second qubit.
+Consider, for example, an entangled pair of qubits belonging to Alice and Bob, re-
+spectively:
+|01∝∇|10∝
+↔
+2
+.
+(2.218)
+Suppose Alice and Bob are a long way away from one another. Alice performs a mea-
+surement of spin along the ⃗v axis, that is, she measures the observable ⃗v · ⃗σ (deﬁned in
+Equation (2.116) on page 90). Suppose Alice receives the result +1. Then a simple quan-
+tum mechanical calculation, given in Box 2.7, shows that she can predict with certainty
+
+--- Page 55 ---
+114
+Introduction to quantum mechanics
+that Bob will measure ∇1 on his qubit if he also measures spin along the ⃗v axis. Similarly,
+if Alice measured ∇1, then she can predict with certainty that Bob will measure +1 on
+his qubit. Because it is always possible for Alice to predict the value of the measurement
+result recorded when Bob’s qubit is measured in the ⃗v direction, that physical property
+must correspond to an element of reality, by the EPR criterion, and should be repre-
+sented in any complete physical theory. However, standard quantum mechanics, as we
+have presented it, merely tells one how to calculate the probabilities of the respective
+measurement outcomes if ⃗v ·⃗σ is measured. Standard quantum mechanics certainly does
+not include any fundamental element intended to represent the value of ⃗v ·⃗σ, for all unit
+vectors ⃗v.
+The goal of EPR was to show that quantum mechanics is incomplete, by demonstrating
+that quantum mechanics lacked some essential ‘element of reality’, by their criterion. They
+hoped to force a return to a more classical view of the world, one in which systems could
+be ascribed properties which existed independently of measurements performed on those
+systems. Unfortunately for EPR, most physicists did not accept the above reasoning as
+convincing. The attempt to impose on Nature by ﬁat properties which she must obey
+seems a most peculiar way of studying her laws.
+Indeed, Nature has had the last laugh on EPR. Nearly thirty years after the EPR paper
+was published, an experimental test was proposed that could be used to check whether
+or not the picture of the world which EPR were hoping to force a return to is valid or not.
+It turns out that Nature experimentally invalidates that point of view, while agreeing
+with quantum mechanics.
+The key to this experimental invalidation is a result known as Bell’s inequality. Bell’s
+inequality is not a result about quantum mechanics, so the ﬁrst thing we need to do is
+momentarily forget all our knowledge of quantum mechanics. To obtain Bell’s inequality,
+we’re going to do a thought experiment, which we will analyze using our common sense
+notions of how the world works – the sort of notions Einstein and his collaborators thought
+Nature ought to obey. After we have done the common sense analysis, we will perform a
+quantum mechanical analysis which we can show is not consistent with the common sense
+analysis. Nature can then be asked, by means of a real experiment, to decide between
+our common sense notions of how the world works, and quantum mechanics.
+Imagine we perform the following experiment, illustrated in Figure 2.4. Charlie pre-
+pares two particles. It doesn’t matter how he prepares the particles, just that he is capable
+of repeating the experimental procedure which he uses. Once he has performed the prepa-
+ration, he sends one particle to Alice, and the second particle to Bob.
+Once Alice receives her particle, she performs a measurement on it. Imagine that she
+has available two different measurement apparatuses, so she could choose to do one of
+two different measurements. These measurements are of physical properties which we
+shall label PQ and PR, respectively. Alice doesn’t know in advance which measurement
+she will choose to perform. Rather, when she receives the particle she ﬂips a coin or
+uses some other random method to decide which measurement to perform. We suppose
+for simplicity that the measurements can each have one of two outcomes, +1 or ∇1.
+Suppose Alice’s particle has a value Q for the property PQ. Q is assumed to be an
+objective property of Alice’s particle, which is merely revealed by the measurement,
+much as we imagine the position of a tennis ball to be revealed by the particles of light
+being scattered off it. Similarly, let R denote the value revealed by a measurement of the
+property PR.
+
+--- Page 56 ---
+EPR and the Bell inequality
+115
+Similarly, suppose that Bob is capable of measuring one of two properties, PS or PT,
+once again revealing an objectively existing value S or T for the property, each taking
+value +1 or ∇1. Bob does not decide beforehand which property he will measure, but
+waits until he has received the particle and then chooses randomly. The timing of the
+experiment is arranged so that Alice and Bob do their measurements at the same time
+(or, to use the more precise language of relativity, in a causally disconnected manner).
+Therefore, the measurement which Alice performs cannot disturb the result of Bob’s
+measurement (or vice versa), since physical inﬂuences cannot propagate faster than light.
+!"#
+"
+#
+"
+"
+#
+"
+"
+#
+"
+"
+#
+"
+$%&'(
+Q
+R
+S
+T
+Figure 2.4. Schematic experimental setup for the Bell inequalities. Alice can choose to measure either Q or R, and
+Bob chooses to measure either S or T. They perform their measurements simultaneously. Alice and Bob are
+assumed to be far enough apart that performing a measurement on one system can not have any effect on the result
+of measurements on the other.
+We are going to do some simple algebra with the quantity QS + RS + RT ∇QT.
+Notice that
+QS + RS + RT ∇QT = (Q + R)S + (R ∇Q)T.
+(2.219)
+Because R, Q = ±1 it follows that either (Q + R)S = 0 or (R ∇Q)T = 0. In either
+case, it is easy to see from (2.219) that QS + RS + RT ∇QT = ±2. Suppose next that
+p(q, r, s, t) is the probability that, before the measurements are performed, the system is
+in a state where Q = q, R = r, S = s, and T = t. These probabilities may depend on
+how Charlie performs his preparation, and on experimental noise. Letting E(·) denote
+the mean value of a quantity, we have
+E(QS + RS + RT ∇QT) =
+⎬
+qrst
+p(q, r, s, t)(qs + rs + rt ∇qt)
+(2.220)
+≤
+⎬
+qrst
+p(q, r, s, t) ⇒2
+(2.221)
+= 2.
+(2.222)
+Also,
+E(QS + RS + RT ∇QT) =
+⎬
+qrst
+p(q, r, s, t)qs +
+⎬
+qrst
+p(q, r, s, t)rs
++
+⎬
+qrst
+p(q, r, s, t)rt ∇
+⎬
+qrst
+p(q, r, s, t)qt
+(2.223)
+= E(QS) + E(RS) + E(RT) ∇E(QT).
+(2.224)
+Comparing (2.222) and (2.224) we obtain the Bell inequality,
+E(QS) + E(RS) + E(RT) ∇E(QT) ≤2.
+(2.225)
+
+--- Page 57 ---
+116
+Introduction to quantum mechanics
+This result is also often known as the CHSH inequality after the initials of its four
+discoverers. It is part of a larger set of inequalities known generically as Bell inequalities,
+since the ﬁrst was found by John Bell.
+By repeating the experiment many times, Alice and Bob can determine each quantity on
+the left hand side of the Bell inequality. For example, after ﬁnishing a set of experiments,
+Alice and Bob get together to analyze their data. They look at all the experiments where
+Alice measured PQ and Bob measured PS. By multiplying the results of their experiments
+together, they get a sample of values for QS. By averaging over this sample, they can
+estimate E(QS) to an accuracy only limited by the number of experiments which they
+perform. Similarly, they can estimate all the other quantities on the left hand side of the
+Bell inequality, and thus check to see whether it is obeyed in a real experiment.
+It’s time to put some quantum mechanics back in the picture. Imagine we perform the
+following quantum mechanical experiment. Charlie prepares a quantum system of two
+qubits in the state
+|ψ∝= |01∝∇|10∝
+↔
+2
+.
+(2.226)
+He passes the ﬁrst qubit to Alice, and the second qubit to Bob. They perform measure-
+ments of the following observables:
+Q = Z1
+S = ∇Z2 ∇X2
+↔
+2
+(2.227)
+R = X1
+T = Z2 ∇X2
+↔
+2
+.
+(2.228)
+Simple calculations show that the average values for these observables, written in the
+quantum mechanical ⟨·∝notation, are:
+⟨QS∝=
+1
+↔
+2
+; ⟨RS∝=
+1
+↔
+2
+; ⟨RT∝=
+1
+↔
+2
+; ⟨QT∝= ∇1
+↔
+2
+.
+(2.229)
+Thus,
+⟨QS∝+ ⟨RS∝+ ⟨RT∝∇⟨QT∝= 2
+↔
+2.
+(2.230)
+Hold on! We learned back in (2.225) that the average value of QS plus the average value
+of RS plus the average value of RT minus the average value of QT can never exceed
+two. Yet here, quantum mechanics predicts that this sum of averages yields 2
+↔
+2!
+Fortunately, we can ask Nature to resolve the apparent paradox for us. Clever experi-
+ments using photons – particles of light – have been done to check the prediction (2.230)
+of quantum mechanics versus the Bell inequality (2.225) which we were led to by our
+common sense reasoning. The details of the experiments are outside the scope of the
+book, but the results were resoundingly in favor of the quantum mechanical prediction.
+The Bell inequality (2.225) is not obeyed by Nature.
+What does this mean? It means that one or more of the assumptions that went into
+the derivation of the Bell inequality must be incorrect. Vast tomes have been written
+analyzing the various forms in which this type of argument can be made, and analyzing
+the subtly different assumptions which must be made to reach Bell-like inequalities. Here
+we merely summarize the main points.
+There are two assumptions made in the proof of (2.225) which are questionable:
+
+--- Page 58 ---
+Chapter problems
+117
+(1) The assumption that the physical properties PQ, PR, PS, PT have deﬁnite values
+Q, R, S, T which exist independent of observation. This is sometimes known as the
+assumption of realism.
+(2) The assumption that Alice performing her measurement does not inﬂuence the
+result of Bob’s measurement. This is sometimes known as the assumption of
+locality.
+These two assumptions together are known as the assumptions of local realism. They are
+certainly intuitively plausible assumptions about how the world works, and they ﬁt our
+everyday experience. Yet the Bell inequalities show that at least one of these assumptions
+is not correct.
+What can we learn from Bell’s inequality? For physicists, the most important lesson
+is that their deeply held commonsense intuitions about how the world works are wrong.
+The world is not locally realistic. Most physicists take the point of view that it is the
+assumption of realism which needs to be dropped from our worldview in quantum me-
+chanics, although others have argued that the assumption of locality should be dropped
+instead. Regardless, Bell’s inequality together with substantial experimental evidence now
+points to the conclusion that either or both of locality and realism must be dropped from
+our view of the world if we are to develop a good intuitive understanding of quantum
+mechanics.
+What lessons can the ﬁelds of quantum computation and quantum information learn
+from Bell’s inequality? Historically the most useful lesson has perhaps also been the most
+vague: there is something profoundly ‘up’ with entangled states like the EPR state. A lot
+of mileage in quantum computation and, especially, quantum information, has come from
+asking the simple question: ‘what would some entanglement buy me in this problem?’
+As we saw in teleportation and superdense coding, and as we will see repeatedly later
+in the book, by throwing some entanglement into a problem we open up a new world
+of possibilities unimaginable with classical information. The bigger picture is that Bell’s
+inequality teaches us that entanglement is a fundamentally new resource in the world that
+goes essentially beyond classical resources; iron to the classical world’s bronze age. A major
+task of quantum computation and quantum information is to exploit this new resource to
+do information processing tasks impossible or much more difﬁcult with classical resources.
+Problem 2.1: (Functions of the Pauli matrices)
+Let f(·) be any function from
+complex numbers to complex numbers. Let ⃗n be a normalized vector in three
+dimensions, and let θ be real. Show that
+f (θ⃗n · ⃗σ) = f(θ) + f(∇θ)
+2
+I + f(θ) ∇f(∇θ)
+2
+⃗n · ⃗σ.
+(2.231)
+Problem 2.2: (Properties of the Schmidt number)
+Suppose |ψ∝is a pure state of
+a composite system with components A and B.
+(1) Prove that the Schmidt number of |ψ∝is equal to the rank of the reduced
+density matrix ,A ≺trB(|ψ∝⟨ψ|). (Note that the rank of a Hermitian
+operator is equal to the dimension of its support.)
+(2) Suppose |ψ∝= #
+j |αj∝|βj∝is a representation for |ψ∝, where |αj∝and |βj∝
+are (un-normalized) states for systems A and B, respectively. Prove that the
+
+--- Page 59 ---
+118
+Introduction to quantum mechanics
+number of terms in such a decomposition is greater than or equal to the
+Schmidt number of |ψ∝, Sch(ψ).
+(3) Suppose |ψ∝= α|ϕ∝+ β|γ∝. Prove that
+Sch(ψ) ∩|Sch(ϕ) ∇Sch(γ)| .
+(2.232)
+Problem 2.3: (Tsirelson’s inequality)
+Suppose
+Q = ⃗q · ⃗σ, R = ⃗r · ⃗σ, S = ⃗s · ⃗σ, T = ⃗t · ⃗σ, where ⃗q,⃗r,⃗s and ⃗t are real unit vectors
+in three dimensions. Show that
+(Q ◦S + R ◦S + R ◦T ∇Q ◦T)2 = 4I + [Q, R] ◦[S, T].
+(2.233)
+Use this result to prove that
+⟨Q ◦S∝+ ⟨R ◦S∝+ ⟨R ◦T∝∇⟨Q ◦T∝≤2
+↔
+2,
+(2.234)
+so the violation of the Bell inequality found in Equation (2.230) is the maximum
+possible in quantum mechanics.
+History and further reading
+There are an enormous number of books on linear algebra at levels ranging from High
+School through to Graduate School. Perhaps our favorites are the two volume set by
+Horn and Johnson[HJ85, HJ91], which cover an extensive range of topics in an accessible
+manner. Other useful references include Marcus and Minc[MM92], and Bhatia[Bha97]. Good
+introductions to linear algebra include Halmos[Hal58], Perlis[Per52], and Strang[Str76].
+There are many excellent books on quantum mechanics. Unfortunately, most of
+these books focus on topics of tangential interest to quantum information and computa-
+tion. Perhaps the most relevant in the existing literature is Peres’ superb book[Per93].
+Beside an extremely clear exposition of elementary quantum mechanics, Peres gives
+an extensive discussion of the Bell inequalities and related results. Good introductory
+level texts include Sakurai’s book[Sak95], Volume III of the superb series by Feynman,
+Leighton, and Sands[FLS65a], and the two volume work by Cohen-Tannoudji, Diu and
+Lalo¨e[CTDL77a, CTDL77b]. All three of these works are somewhat closer in spirit to quan-
+tum computation and quantum information than are most other quantum mechanics
+texts, although the great bulk of each is still taken up by applications far removed from
+quantum computation and quantum information. As a result, none of these texts need
+be read in detail by someone interested in learning about quantum computation and
+quantum information. However, any one of these texts may prove handy as a reference,
+especially when reading articles by physicists. References for the history of quantum
+mechanics may be found at the end of Chapter 1.
+Many texts on quantum mechanics deal only with projective measurements. For ap-
+plications to quantum computing and quantum information it is more convenient – and,
+we believe, easier for novices – to start with the general description of measurements,
+of which projective measurements can be regarded as a special case. Of course, ulti-
+mately, as we have shown, the two approaches are equivalent. The theory of generalized
+measurements which we have employed was developed between the 1940s and 1970s.
+Much of the history can be distilled from the book of Kraus[Kra83]. Interesting discus-
+sion of quantum measurements may be found in Section 2.2 of Gardiner[Gar91], and in
+the book by Braginsky and Khahili[BK92]. The POVM measurement for distinguishing
+
+--- Page 60 ---
+History and further reading
+119
+non-orthogonal states described in Section 2.2.6 is due to Peres[Per88]. The extension
+described in Exercise 2.64 appeared in Duan and Guo[DG98].
+Superdense coding was invented by Bennett and Wiesner[BW92]. An experiment im-
+plementing a variant of superdense coding using entangled photon pairs was performed
+by Mattle, Weinfurter, Kwiat, and Zeilinger[MWKZ96].
+The density operator formalism was introduced independently by Landau[Lan27] and
+by von Neumann[von27]. The unitary freedom in the ensemble for density matrices, The-
+orem 2.6, was ﬁrst pointed out by Schro¨dinger[Sch36], and was later rediscovered and
+extended by Jaynes[Jay57] and by Hughston, Jozsa and Wootters[HJW93]. The result of Ex-
+ercise 2.73 is from the paper by Jaynes, and the results of Exercises 2.81 and 2.82 appear
+in the paper by Hughston, Jozsa and Wootters. The class of probability distributions
+which may appear in a density matrix decomposition for a given density matrix has been
+studied by Uhlmann[Uhl70] and by Nielsen[Nie99b]. Schmidt’s eponymous decomposition
+appeared in[Sch06]. The result of Exercise 2.77 was noted by Peres[Per95].
+The EPR thought experiment is due to Einstein, Podolsky and Rosen[EPR35], and
+was recast in essentially the form we have given here by Bohm[Boh51]. It is sometimes
+misleadingly referred to as the EPR ‘paradox’. The Bell inequality is named in honour
+of Bell[Bel64], who ﬁrst derived inequalities of this type. The form we have presented is
+due to Clauser, Horne, Shimony, and Holt[CHSH69], and is often known as the CHSH
+inequality. This inequality was derived independently by Bell, who did not publish the
+result.
+Part 3 of Problem 2.2 is due to Thapliyal (private communication). Tsirelson’s in-
+equality is due to Tsirelson[Tsi80].
+
