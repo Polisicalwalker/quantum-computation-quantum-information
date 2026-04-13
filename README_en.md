@@ -13,9 +13,12 @@ A collection of exercise solutions, organized by chapter.
 │   ├── solutions_chap2_A4.pdf          # Solutions PDF (A4 format)
 │   ├── solutions_chap2_us_letter.pdf   # Solutions PDF (US Letter format)
 │   └── solutions.md                    # Solutions (Markdown)
-├── chapter03/              # Chapter 3: (to be added)
+├── chapter03/              # Chapter 3: Introduction to Computer Science
+│   ├── textbook_chap3.pdf              # Textbook chapter PDF
+│   └── solutions.md                    # Solutions (Markdown)
 └── trash/                  # Intermediate / process files
-    └── chapter2_process_files/
+    ├── chapter2_process_files/
+    └── chapter3_process_files/
 ```
 
 ## Naming Convention
@@ -29,5 +32,5 @@ A collection of exercise solutions, organized by chapter.
 
 ## Notes
 
-- `trash/` contains intermediate files generated during the agent workflow (extracted text, raw data, etc.). They are kept but moved out of the main directory.
+- `trash/` contains intermediate files generated during the agent workflow (extracted text, raw data, scripts, etc.). They are kept but moved out of the main directory.
 - When adding a new chapter, create a `chapterXX/` folder in the root directory and follow the same naming convention.

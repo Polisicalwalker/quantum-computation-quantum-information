@@ -13,9 +13,12 @@
 │   ├── solutions_chap2_A4.pdf          # 习题解答 PDF (A4 版)
 │   ├── solutions_chap2_us_letter.pdf   # 习题解答 PDF (US Letter 版)
 │   └── solutions.md                    # 习题解答 (Markdown)
-├── chapter03/              # Chapter 3: (待添加)
+├── chapter03/              # Chapter 3: Introduction to Computer Science
+│   ├── textbook_chap3.pdf              # 原书章节 PDF
+│   └── solutions.md                    # 习题解答 (Markdown)
 └── trash/                  # 过程性/中间文件
-    └── chapter2_process_files/
+    ├── chapter2_process_files/
+    └── chapter3_process_files/
 ```
 
 ## 命名规范
@@ -29,5 +32,5 @@
 
 ## 说明
 
-- `trash/` 存放 agent 生成过程中的中间文件（提取文本、原始数据等），不删除但移出主目录
+- `trash/` 存放 agent 生成过程中的中间文件（提取文本、原始数据、脚本等），不删除但移出主目录
 - 新增章节时，在根目录创建 `chapterXX/` 文件夹，按相同规范命名
